@@ -1,0 +1,38 @@
+src/
+│
+├── assets/                # Imagens, ícones, fontes, etc.
+│
+├── components/            # Componentes de UI reutilizáveis (SRP)
+│   ├── Button/
+│   │   ├── Button.tsx
+│   │   └── Button.types.ts
+│   └── Input/
+│       ├── Input.tsx
+│       └── Input.types.ts
+│
+├── features/              # Domínios/funcionalidades do sistema
+│   └── auth/
+│       ├── components/    # Componentes específicos da feature
+│       ├── hooks/         # Hooks customizados da feature
+│       ├── pages/         # Páginas relacionadas (ex: LoginPage.tsx)
+│       ├── services/      # Serviços (ex: authService.ts)
+│       └── types/         # Tipos/interfaces da feature
+│
+├── hooks/                 # Hooks customizados globais
+│
+├── layouts/               # Layouts de páginas
+│
+├── routes/                # Definição das rotas do app
+│
+├── services/              # Serviços globais (ex: api.ts, storage.ts)
+│
+├── contexts/              # Contextos globais (ex: AuthContext)
+│
+├── styles/                # Arquivos de estilo (ex: Tailwind, CSS global)
+│   └── index.css
+│
+├── utils/                 # Funções utilitárias e helpers
+│
+├── App.tsx
+├── main.tsx
+└── vite-env.d.ts
