@@ -13,7 +13,8 @@ export default {
         darkLight: "#1D1D1D",        // Texto moderado
         gray: "#BDBDBD",         // Cinza dos ícones/inputs
         white: "#FFFFFF",
-        grayScale: "#666666"
+        grayScale: "#666666",
+        primartLight: "#F5EAEA"
       }
     },
   },

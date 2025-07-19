@@ -2,12 +2,19 @@ import { useState } from "react"
 import Input from "./Input"
 import { FiArrowRight, FiEye, FiEyeOff, FiLock, FiMail } from "react-icons/fi"
 import Button from "./Button"
+import { useNavigate } from "react-router-dom"
+
 
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false)
+    const navigate = useNavigate()
+    const handleSubmitLogin = (e: React.FormEvent) => {
+        e.preventDefault()
+        navigate("/admin")
+    }
     return(
-        <form action="">
+        <form action="" onSubmit={handleSubmitLogin}>
             <Input
                 label="E-Mail"
                 type="email"
@@ -34,8 +41,10 @@ const LoginForm = () => {
             </div>
 
             <Button type="submit">
-                Acessar <span className="ml-2"> <FiArrowRight/> </span>
+                    Acessar <span className="ml-2"> <FiArrowRight/> </span>
             </Button>
+
+            
         </form>
     )
 }
