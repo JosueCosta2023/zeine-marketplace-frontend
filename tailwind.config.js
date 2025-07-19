@@ -9,9 +9,11 @@ export default {
         primary: "#F15A29",      // Laranja do botão
         secondary: "#009FE3",    // Azul do logo
         accent: "#F6F2F2",       // Fundo claro
-        dark: "#222222",         // Texto escuro
+        dark: "#222222",          // Texto escuro
+        darkLight: "#1D1D1D",        // Texto moderado
         gray: "#BDBDBD",         // Cinza dos ícones/inputs
         white: "#FFFFFF",
+        grayScale: "#666666"
       }
     },
   },

@@ -15,7 +15,7 @@ const LoginForm = () => {
                 icon={<FiMail/>}
                 required
             />
-            <div className="relative">
+            <div className="relative mb-12">
                 <Input
                     label="Senha"
                     type={showPassword ? "text" : "password"}
@@ -26,7 +26,7 @@ const LoginForm = () => {
                 />
                 <button
                     type="button"
-                    className="absolute right-3 top-9 text-gray-400"
+                    className="absolute right-3 top-12 text-gray-400"
                     onClick={() => setShowPassword((prev) => !prev)}
                 >
                     { showPassword ? <FiEyeOff/> : <FiEye/>}
