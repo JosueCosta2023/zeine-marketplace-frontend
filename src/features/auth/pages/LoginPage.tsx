@@ -7,11 +7,12 @@ const LoginPage = () => {
   return (
     <AuthLayout>
       <div className="w-[403px] p-[10px] py-20">
-        <h2 className="text-2xl font-bold mb-2 text-dark">Acesse sua conta</h2>
+        <h2 className="text-2xl font-bold mb-2 text-grayScale">Acesse sua conta</h2>
         <p className="text-grayScale mb-12">
           Informe seu Email e senha para entrar
         </p>
         <LoginForm />
+
         <div className="mt-[131px] text-left flex flex-col">
           <span className="text-grayScale mb-2">Ainda não tem uma conta?</span>
           <Link
