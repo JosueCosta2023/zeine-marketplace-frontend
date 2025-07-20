@@ -8,12 +8,12 @@ import Button from "../components/Button";
 const RegisterUserPage = () => {
   return (
     
-      <AuthLayout rightClassName="items-start flex flex-col">
+      <AuthLayout rightClassName="items-center flex flex-col">
         <div className="w-[403px]  mt-[72px] text-grayScale ">
           <h2 className="text-2xl font-bold mb-2">Crie sua conta</h2>
           <p className="">Informe os seus dados pessoais e de acesso</p>
         </div>
-        <div className="w-[403px] max-h-[90vh] py-10 overflow-y-auto scrollbar-hide">
+        <div className="w-[403px] max-h-[90vh]  overflow-y-auto scrollbar-hide">
           <RegistrationForm/>
 
           <div className="mt-8 text-left flex flex-col mb-[96px]">

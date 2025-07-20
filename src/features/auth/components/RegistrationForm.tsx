@@ -28,7 +28,7 @@ const RegistrationForm = () => {
     }
 
     return(
-        <form onSubmit={handleSubmitRegister} className="mb-[80px]">
+        <form onSubmit={handleSubmitRegister} className="mb-[80px] mt-[40px]">
             {/* Perfil */}
             <section className="mb-12">
                 <h3 className="text-lg font-semibold mb-5">Perfil</h3>

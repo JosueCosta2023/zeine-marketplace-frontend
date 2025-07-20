@@ -6,7 +6,7 @@ import { FaRegUser } from "react-icons/fa";
 const LoginPage = () => {
   return (
     <AuthLayout>
-      <div className="w-[403px] p-[10px] py-20">
+      <div className="w-[403px] mt-[72px] ">
         <h2 className="text-2xl font-bold mb-2 text-grayScale">Acesse sua conta</h2>
         <p className="text-grayScale mb-12">
           Informe seu Email e senha para entrar

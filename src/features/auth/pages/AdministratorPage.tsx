@@ -1,9 +1,10 @@
+import Header from "../../../layout/Header"
 
 
 const AdministratorPage = () => {
     return(
         <>
-            Ola usuario
+            <Header/>
         </>
     )
 }

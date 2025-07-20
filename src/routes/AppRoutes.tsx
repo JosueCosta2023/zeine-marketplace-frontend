@@ -5,6 +5,7 @@ import ProductsFormPage from "../features/auth/pages/ProductsFormPage";
 import PageNotFound from "../features/commun/pages/PageNotFound";
 import RegisterUserPage from "../features/auth/pages/RegisterUserPage";
 import AdministratorPage from "../features/auth/pages/AdministratorPage";
+import Header from "../layout/Header";
 
 const AppRoutes = () => {
   return (
@@ -12,14 +13,16 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/admin" element={<AdministratorPage />} />
         <Route path="/register" element={<RegisterUserPage />} />
 
     {/* Rotas aninhadas, rota pai PRODUCTS */}
-        <Route path="/products">
-          <Route index element={<ProductsListPage />} />
-          <Route path="register" element={<ProductsFormPage />} />
-          <Route path=":id/edit" element={<ProductsFormPage />} />
+        <Route element={<Header/>}>
+          <Route path="/admin" element={<AdministratorPage />} /> 
+          <Route path="/products">
+            <Route index element={<ProductsListPage />} />
+            <Route path="register" element={<ProductsFormPage />} />
+            <Route path=":id/edit" element={<ProductsFormPage />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<PageNotFound />} />
