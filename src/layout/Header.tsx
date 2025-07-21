@@ -1,6 +1,6 @@
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import { TbChartHistogram } from "react-icons/tb";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import ArchiveImport from "../features/commun/ArchiveImport/ArchiveImport";
 import Button from "../features/auth/components/Button";
 import { FiPlus } from "react-icons/fi";

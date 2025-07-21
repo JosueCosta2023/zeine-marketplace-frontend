@@ -5,7 +5,7 @@ import ProductsFormPage from "../features/auth/pages/ProductsFormPage";
 import PageNotFound from "../features/commun/pages/PageNotFound";
 import RegisterUserPage from "../features/auth/pages/RegisterUserPage";
 import AdministratorPage from "../features/auth/pages/AdministratorPage";
-import Header from "../layout/Header";
+import HeartLayout from "../layout/HeaderLayout";
 
 const AppRoutes = () => {
   return (
@@ -16,7 +16,7 @@ const AppRoutes = () => {
         <Route path="/register" element={<RegisterUserPage />} />
 
     {/* Rotas aninhadas, rota pai PRODUCTS */}
-        <Route element={<Header/>}>
+        <Route element={<HeartLayout/>}>
           <Route path="/admin" element={<AdministratorPage />} /> 
           <Route path="/products">
             <Route index element={<ProductsListPage />} />
