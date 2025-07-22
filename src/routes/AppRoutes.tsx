@@ -1,11 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "../features/auth/pages/LoginPage";
 import ProductsListPage from "../features/auth/pages/ProductsListPage";
-import ProductsFormPage from "../features/auth/pages/ProductsFormPage";
 import PageNotFound from "../features/commun/pages/PageNotFound";
 import RegisterUserPage from "../features/auth/pages/RegisterUserPage";
 import AdministratorPage from "../features/auth/pages/AdministratorPage";
 import HeartLayout from "../layout/HeaderLayout";
+import ProductsRegisterPage from "../features/auth/pages/ProductsRegisterPage";
+import ProductDetailPage from "../features/auth/pages/ProductDetailPage";
 
 const AppRoutes = () => {
   return (
@@ -20,8 +21,8 @@ const AppRoutes = () => {
           <Route path="/admin" element={<AdministratorPage />} /> 
           <Route path="/products">
             <Route index element={<ProductsListPage />} />
-            <Route path="register" element={<ProductsFormPage />} />
-            <Route path=":id" element={<ProductsFormPage />} />
+            <Route path="register" element={<ProductsRegisterPage />} />
+            <Route path=":id" element={<ProductDetailPage />} />
           </Route>
         </Route>
 

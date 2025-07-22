@@ -89,18 +89,20 @@ const ProductsListPage = () => {
                         <input type="text" id="search" placeholder="Pesquisar Categoria" className="w-full text-[16px] outline-none px-3 bg-transparent" />
                     </div>
                     <div className="w-full border-b-[1px] border-b-slate-400/40 flex items-center gap-1 h-[48px]">
-                        <label htmlFor="search" className="text-grayScale"><BsFillTagsFill/></label>
-                        <select name="" id="" className="w-full outline-none text-grayScale p-3">
+                        <label htmlFor="select" className="text-grayScale"><BsFillTagsFill/></label>
+                        <select name="" id="select" className="w-full outline-none text-grayScale p-3">
                             <option value="">Status</option>
-                            <option value="">Vendido</option>
-                            <option value="">Cancelado</option>
-                            <option value="">Anunciado</option>
+                            <option value="VENDIDO">Vendido</option>
+                            <option value="CANCELADO">Cancelado</option>
+                            <option value="ANUNCIADO">Anunciado</option>
                         </select>
                     </div>
 
                     <div className="mt-[40px]">
                         <Button>
-                            Aplicar Filtro
+                            <span className="w-full">
+                                Aplicar Filtro
+                            </span>
                         </Button>
                     </div>
             </div>
