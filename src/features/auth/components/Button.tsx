@@ -4,10 +4,11 @@ import type { ButtonHTMLAttributes } from "react"
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     children: React.ReactNode;
     asChildren?: boolean;
-    variant?: "primary" | "outline" | "secondary"
+    variant?: "primary" | "outline" | "secondary";
+    className: string
 }
 
-const Button = ({children, variant = "outline", ...props}: ButtonProps) => {
+const Button = ({className = "", children, variant = "outline", ...props}: ButtonProps) => {
 
     const base = "w-full h-[56px] py-2 rounded-[10px] font-medium flex items-center justify-center gap-2 transition";
 

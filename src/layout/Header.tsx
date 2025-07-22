@@ -52,7 +52,10 @@ const Header = () => {
       {/* Ações */}
       <div className="flex gap-3 items-center">
         <Link to="/products/register">
-          <Button className="bg-primary text-white rounded-[8px] px-4 py-2 flex items-center gap-2 hover:bg-primary/90 transition font-medium">
+        {/* 
+          className="bg-primary text-white rounded-[8px] px-4 py-2 flex items-center gap-2 hover:bg-primary/90 transition font-medium"
+        */}
+          <Button>
             <FiPlus size={16} />
             Novo produto
           </Button>

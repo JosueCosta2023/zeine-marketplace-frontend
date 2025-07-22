@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import ArchiveImport from "../../commun/ArchiveImport/ArchiveImport";
 import CardProduct from "../components/CardProduct";
+import { BiSearch } from "react-icons/bi";
+import { BsFillTagsFill } from "react-icons/bs";
+import Button from "../components/Button";
 
 const ProductsListPage = () => {
 
@@ -63,6 +66,8 @@ const ProductsListPage = () => {
         },
     ]
 
+
+
     
   return (
     <div className="flex p-20 w-full">
@@ -77,7 +82,27 @@ const ProductsListPage = () => {
         </div>
 
         <div className="flex gap-6">
-            <div className="w-[327px] h-[306px] rounded-[20px] bg-blue-500">
+            <div className="w-[327px] h-[306px] bg-white rounded-[20px] p-6">
+                    <span className="font-bold text-lg text-grayScale">Filtrar</span>
+                    <div className="w-full mb-5 border-b-[1px] border-b-slate-400/40 flex items-center gap-1 h-[48px]">
+                        <label htmlFor="search" className="text-grayScale"><BiSearch size={24}/></label>
+                        <input type="text" id="search" placeholder="Pesquisar Categoria" className="w-full text-[16px] outline-none px-3 bg-transparent" />
+                    </div>
+                    <div className="w-full border-b-[1px] border-b-slate-400/40 flex items-center gap-1 h-[48px]">
+                        <label htmlFor="search" className="text-grayScale"><BsFillTagsFill/></label>
+                        <select name="" id="" className="w-full outline-none text-grayScale p-3">
+                            <option value="">Status</option>
+                            <option value="">Vendido</option>
+                            <option value="">Cancelado</option>
+                            <option value="">Anunciado</option>
+                        </select>
+                    </div>
+
+                    <div className="mt-[40px]">
+                        <Button>
+                            Aplicar Filtro
+                        </Button>
+                    </div>
             </div>
 
             <div className="w-[679px]  rounded-[20px] flex flex-wrap gap-4 ">
