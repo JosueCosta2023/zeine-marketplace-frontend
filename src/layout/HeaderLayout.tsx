@@ -5,7 +5,7 @@ const HeartLayout = () => {
     return(
         <>
             <Header/>
-            <main>
+            <main className="bg-accent">
                 <Outlet/>
             </main>
         </>

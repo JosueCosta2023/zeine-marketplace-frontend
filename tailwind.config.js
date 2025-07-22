@@ -7,7 +7,8 @@ export default {
     extend: {
       colors: {
         primary: "#F15A29",      // Laranja do botão
-        secondary: "#009FE3",    // Azul do logo
+        secondary: "#009FE3", 
+        secondaryLight: "#D7EFF9",   // Azul do logo
         accent: "#F6F2F2",       // Fundo claro
         dark: "#222222",          // Texto escuro
         darkLight: "#1D1D1D",        // Texto moderado

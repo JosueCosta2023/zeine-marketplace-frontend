@@ -1,13 +1,13 @@
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import { TbChartHistogram } from "react-icons/tb";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ArchiveImport from "../features/commun/ArchiveImport/ArchiveImport";
 import Button from "../features/auth/components/Button";
 import { FiPlus } from "react-icons/fi";
 
 const Header = () => {
   return (
-    <header className="w-full flex items-center justify-between bg-accent h-[64px] px-6 shadow-sm">
+    <header className="w-full flex items-center justify-between bg-accent h-[64px] px-6 shadow-sm border-b-[1px] border-b-gray border-opacity-50">
       {/* Logo */}
       <div className="flex items-center">
         <img
