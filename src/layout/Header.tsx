@@ -23,11 +23,11 @@ const Header = () => {
           to="/admin"
           className={({ isActive }) =>
             `flex items-center gap-2 px-3 py-1 rounded-[8px] font-medium text-sm transition
-      ${
-        isActive
-          ? "bg-primary/10 text-primary"
-          : "text-grayScale hover:bg-gray-100"
-      }`
+        ${
+          isActive
+            ? "bg-primary/10 text-primary"
+            : "text-grayScale hover:bg-gray-100"
+        }`
           }
         >
           <TbChartHistogram size={18} />
@@ -37,13 +37,12 @@ const Header = () => {
           to="/products"
           className={({ isActive }) =>
             `flex items-center gap-2 px-3 py-1 rounded-[8px] font-medium text-sm transition
-      ${
-        isActive
-          ? "bg-primary/10 text-primary"
-          : "text-grayScale hover:bg-gray-100"
-      }`
+        ${
+          isActive
+            ? "bg-primary/10 text-primary"
+            : "text-grayScale hover:bg-gray-100"
+        }`
           }
-          
         >
           <GiCardboardBoxClosed size={18} />
           Produtos

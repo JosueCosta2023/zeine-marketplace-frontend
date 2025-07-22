@@ -21,7 +21,7 @@ const AppRoutes = () => {
           <Route path="/products">
             <Route index element={<ProductsListPage />} />
             <Route path="register" element={<ProductsFormPage />} />
-            <Route path=":id/edit" element={<ProductsFormPage />} />
+            <Route path=":id" element={<ProductsFormPage />} />
           </Route>
         </Route>
 

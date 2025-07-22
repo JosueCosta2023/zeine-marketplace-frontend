@@ -4,6 +4,7 @@ import personDefaulImage from "../../../assets/personIcon.png";
 import saleTag from "../../../assets/sale-tag-02.svg";
 import VectorPeople from "../../../assets/Vector.svg";
 import Store from "../../../assets/store-04.svg"
+import sampleImage from "../../../assets/sample.png";
 
 
 const archives = {
@@ -13,7 +14,8 @@ const archives = {
         personDefaultImage: personDefaulImage,
         saleTag: saleTag,
         VectorPeople: VectorPeople,
-        Store: Store
+        Store: Store,
+        SampleImage: sampleImage
     }
 }
 
