@@ -2,10 +2,10 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "../features/auth/pages/LoginPage";
 import ProductsListPage from "../features/auth/pages/ProductsListPage";
 import PageNotFound from "../features/commun/pages/PageNotFound";
-import RegisterUserPage from "../features/auth/pages/RegisterUserPage";
+import RegisterUserPage from "../features/auth/pages/RegistrationUserPage";
 import AdministratorPage from "../features/auth/pages/AdministratorPage";
 import HeartLayout from "../layout/HeaderLayout";
-import ProductsRegisterPage from "../features/auth/pages/ProductsRegisterPage";
+import ProductsRegisterPage from "../features/auth/pages/RegistrationProductPage";
 import ProductDetailPage from "../features/auth/pages/ProductDetailPage";
 
 const AppRoutes = () => {

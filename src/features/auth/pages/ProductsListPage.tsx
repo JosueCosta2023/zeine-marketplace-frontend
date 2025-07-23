@@ -1,86 +1,13 @@
 import { Link } from "react-router-dom";
-import ArchiveImport from "../../commun/ArchiveImport/ArchiveImport";
 import CardProduct from "../components/CardProduct";
 import { BiSearch } from "react-icons/bi";
 import { BsFillTagsFill } from "react-icons/bs";
 import Button from "../../../components/Button";
+import data from "../../../services/mockApi";
 
-export const dataProduct = [
-  {
-    id: 1,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 1",
-    price: 149.67,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 2,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 2",
-    price: 19.67,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 3,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 3",
-    price: 120,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 4,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 4",
-    price: 49.67,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 5,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 5",
-    price: 14.7,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 6,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 6",
-    price: 129.3,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 7,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 7",
-    price: 9.67,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-  {
-    id: 8,
-    image: ArchiveImport.archives.images.SampleImage,
-    title: "Produto 8",
-    price: 147,
-    description:
-      "Este produto obteve recordes de vendas, abaixe o preço em sinal de agradecimento.",
-    tags: ["VENDIDO", "MOVEL"],
-  },
-];
 
 const ProductsListPage = () => {
+
   return (
     <div className="flex p-20 w-full">
       <div className="flex flex-col w-full">
@@ -131,8 +58,8 @@ const ProductsListPage = () => {
           </div>
 
           <div className="w-[679px]  rounded-[20px] flex flex-wrap gap-4 ">
-            {dataProduct.map((product, index) => (
-              <Link to={`/products/${index}`}>
+            {data.map((product, key) => (
+              <Link to={`/products/${product.id}`} key={product.id}>
                 <CardProduct
                   image={product.image}
                   title={product.title}

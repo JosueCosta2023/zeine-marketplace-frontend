@@ -1,5 +1,4 @@
 import {
-  FiArrowRight,
   FiCamera,
   FiCheck,
   FiEye,
@@ -142,7 +141,7 @@ const RegistrationForm = () => {
       <Button type="submit">
         Cadastrar{" "}
         <span className="ml-2">
-          <FiArrowRight />
+          <FiUser />
         </span>
       </Button>
     </form>

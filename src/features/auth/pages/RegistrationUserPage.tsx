@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import { FiArrowRight } from "react-icons/fi";
-import RegistrationForm from "../components/RegistrationForm";
+import RegistrationForm from "../components/RegistrationUserForm";
 import Button from "../../../components/Button";
 
 const RegisterUserPage = () => {

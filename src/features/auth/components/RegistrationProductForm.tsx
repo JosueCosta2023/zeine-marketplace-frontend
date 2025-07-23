@@ -9,7 +9,8 @@ export interface ProductFormValues {
   price: number;
   description: string;
   image?: string;
-  tags?: string[];
+  status?: string;
+  categoryId: string;
 }
 
 interface ProductFormProsp {
@@ -19,7 +20,7 @@ interface ProductFormProsp {
 }
 
 const ProductForm: React.FC<ProductFormProsp> = ({
-  initialValues = { title: "", price: 0, description: "", image: "", tags: [] },
+  initialValues = { title: "", price: 0, description: "", image: "", categoryId: "", status: "" },
   readOnlys = false,
   onSubmit,
 }) => {
@@ -118,9 +119,9 @@ const ProductForm: React.FC<ProductFormProsp> = ({
           <select
             name="categoria"
             id="select"
-            className="w-full h-[48px] outline-none text-grayScale"
-            value={values.tags?.[0] || ""}
-            onChange={(e) => setValues({ ...values, tags: [e.target.value] })}
+            className="w-full h-[48px] outline-none p-3 text-grayScale"
+            value={values.categoryId || ""}
+            onChange={(e) => setValues({ ...values, categoryId: e.target.value })}
           >
             <option value="">Selecione</option>
             <option value="MOVEL">Móvel</option>
