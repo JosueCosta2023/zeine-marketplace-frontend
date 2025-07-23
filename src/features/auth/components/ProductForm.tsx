@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../../../components/Input";
+import Button from "../../../components/Button";
 import { FiImage } from "react-icons/fi";
 
 export interface ProductFormValues {

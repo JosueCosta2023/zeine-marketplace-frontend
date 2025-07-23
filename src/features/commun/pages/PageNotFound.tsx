@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Button from "../../auth/components/Button";
+import Button from "../../../components/Button";
 import { HiHome } from "react-icons/hi";
 import ArchiveImport from "../ArchiveImport/ArchiveImport";
 
@@ -14,7 +14,12 @@ const PageNotFound = () => {
       <p className="text-lg">em Desenvolvimento</p>
       <div className="max-w-[300px] min-w-[150px] mt-10">
         <Button>
-          <Link to="/" className="text-center w-full flex items-center gap-3 justify-center">Voltar Home {<HiHome/>}</Link>
+          <Link
+            to="/"
+            className="text-center w-full flex items-center gap-3 justify-center"
+          >
+            Voltar Home {<HiHome />}
+          </Link>
         </Button>
       </div>
     </div>
