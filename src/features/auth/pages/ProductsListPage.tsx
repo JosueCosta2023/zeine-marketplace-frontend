@@ -5,10 +5,9 @@ import { BiSearch } from "react-icons/bi";
 import { BsFillTagsFill } from "react-icons/bs";
 import Button from "../components/Button";
 
-const ProductsListPage = () => {
-
-    const dataProduct = [
+export const dataProduct = [
         {
+            id: 1,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 1",
             price: 149.67,
@@ -16,6 +15,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 2,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 2",
             price: 19.67,
@@ -23,6 +23,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 3,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 3",
             price: 120,
@@ -30,6 +31,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 4,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 4",
             price: 49.67,
@@ -37,6 +39,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 5,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 5",
             price: 14.7,
@@ -44,6 +47,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 6,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 6",
             price: 129.3,
@@ -51,6 +55,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 7,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 7",
             price: 9.67,
@@ -58,6 +63,7 @@ const ProductsListPage = () => {
             tags: ["VENDIDO", "MOVEL"]
         },
         {
+            id: 8,
             image: ArchiveImport.archives.images.SampleImage,
             title: "Produto 8",
             price: 147,
@@ -67,8 +73,8 @@ const ProductsListPage = () => {
     ]
 
 
+const ProductsListPage = () => {
 
-    
   return (
     <div className="flex p-20 w-full">
       <div className="flex flex-col w-full">
@@ -127,4 +133,4 @@ const ProductsListPage = () => {
   );
 };
 
-export default ProductsListPage;
+export default ProductsListPage
