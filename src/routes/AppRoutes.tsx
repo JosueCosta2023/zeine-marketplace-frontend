@@ -2,11 +2,11 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "../features/auth/pages/LoginPage";
 import ProductsListPage from "../features/auth/pages/ProductsListPage";
 import PageNotFound from "../features/commun/pages/PageNotFound";
-import RegisterUserPage from "../features/auth/pages/RegistrationUserPage";
 import AdministratorPage from "../features/auth/pages/AdministratorPage";
 import HeartLayout from "../layout/HeaderLayout";
-import ProductsRegisterPage from "../features/auth/pages/RegistrationProductPage";
 import ProductDetailPage from "../features/auth/pages/ProductDetailPage";
+import RegistrationUserPage from "../features/auth/pages/RegistrationUserPage";
+import RegistrationProductPage from "../features/auth/pages/RegistrationProductPage";
 
 const AppRoutes = () => {
   return (
@@ -14,14 +14,14 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterUserPage />} />
+        <Route path="/register" element={<RegistrationUserPage />} />
 
     {/* Rotas aninhadas, rota pai PRODUCTS */}
         <Route element={<HeartLayout/>}>
           <Route path="/admin" element={<AdministratorPage />} /> 
           <Route path="/products">
             <Route index element={<ProductsListPage />} />
-            <Route path="register" element={<ProductsRegisterPage />} />
+            <Route path="register" element={<RegistrationProductPage />} />
             <Route path=":id" element={<ProductDetailPage />} />
           </Route>
         </Route>

@@ -1,15 +1,16 @@
-import ProductForm from "../components/RegistrationProductForm";
+import RegistrationProductForm from "../components/RegistrationProductForm";
 
-const ProductsRegisterPage = () => {
+
+const RegistrationProductPage = () => {
   return (
     <div className="flex flex-col p-20 w-full">
       <div className="w-full mb-10">
         <h3 className="text-2xl text-darkLight font-bold">Novo Produto</h3>
         <p>Cadastre um produto para venda no marketplace</p>
       </div>
-      <ProductForm />
+      <RegistrationProductForm />
     </div>
   );
 };
 
-export default ProductsRegisterPage;
+export default RegistrationProductPage;

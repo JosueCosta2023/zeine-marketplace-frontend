@@ -2,16 +2,7 @@ import React, { useRef, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { FiImage } from "react-icons/fi";
-
-export interface ProductFormValues {
-  id?: number;
-  title: string;
-  price: number;
-  description: string;
-  image?: string;
-  status?: string;
-  categoryId: string;
-}
+import type { ProductFormValues } from "../../../types/globalTypes";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
@@ -19,8 +10,16 @@ interface ProductFormProsp {
   onSubmit?: (values: ProductFormValues) => void;
 }
 
-const ProductForm: React.FC<ProductFormProsp> = ({
-  initialValues = { title: "", price: 0, description: "", image: "", categoryId: "", status: "" },
+
+const RegistrationProductForm: React.FC<ProductFormProsp> = ({
+  initialValues = {
+    title: "",
+    price: 0,
+    description: "",
+    image: "",
+    categoryId: "",
+    status: "",
+  },
   readOnlys = false,
   onSubmit,
 }) => {
@@ -47,6 +46,19 @@ const ProductForm: React.FC<ProductFormProsp> = ({
     setImage(initialValues.image || null);
     setValues(initialValues);
   }, [initialValues?.id]);
+
+  /** 
+   * Campos necessarios em um novo cadastro
+   * {
+    "title": "string",
+    "price": number,
+    "description": "string",
+    "status": "string",
+    "categoryId": "string"
+    }
+   * 
+   * 
+   */
 
   return (
     <form onSubmit={handleSubmit} className="w-full justify-center  flex gap-6">
@@ -121,7 +133,9 @@ const ProductForm: React.FC<ProductFormProsp> = ({
             id="select"
             className="w-full h-[48px] outline-none p-3 text-grayScale"
             value={values.categoryId || ""}
-            onChange={(e) => setValues({ ...values, categoryId: e.target.value })}
+            onChange={(e) =>
+              setValues({ ...values, categoryId: e.target.value })
+            }
           >
             <option value="">Selecione</option>
             <option value="MOVEL">Móvel</option>
@@ -149,4 +163,4 @@ const ProductForm: React.FC<ProductFormProsp> = ({
   );
 };
 
-export default ProductForm;
+export default RegistrationProductForm;

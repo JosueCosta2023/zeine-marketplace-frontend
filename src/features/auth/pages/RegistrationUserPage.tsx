@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import { FiArrowRight } from "react-icons/fi";
-import RegistrationForm from "../components/RegistrationUserForm";
 import Button from "../../../components/Button";
+import RegistrationUserForm from "../components/RegistrationUserForm";
 
-const RegisterUserPage = () => {
+const RegistrationUserPage = () => {
   return (
     <AuthLayout rightClassName="items-center flex flex-col">
       <div className="w-[403px]  mt-[72px] text-grayScale ">
@@ -12,7 +12,7 @@ const RegisterUserPage = () => {
         <p className="">Informe os seus dados pessoais e de acesso</p>
       </div>
       <div className="w-[403px] max-h-[90vh]  overflow-y-auto scrollbar-hide">
-        <RegistrationForm />
+        <RegistrationUserForm />
 
         <div className="mt-8 text-left flex flex-col mb-[96px]">
           <span className="text-grayScale mb-2">Já tem uma conta?</span>
@@ -31,4 +31,4 @@ const RegisterUserPage = () => {
   );
 };
 
-export default RegisterUserPage;
+export default RegistrationUserPage;

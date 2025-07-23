@@ -12,7 +12,7 @@ import Input from "../../../components/Input";
 import { useRef, useState } from "react";
 import Button from "../../../components/Button";
 
-const RegistrationForm = () => {
+const RegistrationUserForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [image, setImage] = useState<string | null>(null);
@@ -31,6 +31,19 @@ const RegistrationForm = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
+
+
+  // Campos necessarios em um novo cadastro
+
+  /* 
+  {
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "password": "suasenha123",
+  "phone": "(11) 99999-9999",
+  "photo": "https://example.com/foto.jpg"
+  }
+  */
 
   return (
     <form onSubmit={handleSubmitRegister} className="mb-[80px] mt-[40px]">
@@ -148,4 +161,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default RegistrationUserForm;
