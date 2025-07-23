@@ -14,8 +14,8 @@ const AdministratorPage = () => {
   return (
     <div className="flex flex-col p-20">
         <div className="w-full mb-[40px]">
-            <h2 className="text-[24px] font-bold text-darkLight">Últimos 30 dias</h2>
-            <p className="text-sm text-grayScale">Confira as estatísticas da sua loja no ultimo mês.</p>
+            <h2 className="text-[24px] font-bold text-darkLight">Últimos 12 meses</h2>
+            <p className="text-sm text-grayScale">Confira as estatísticas da sua loja no ultimo ano.</p>
         </div>
 
 
