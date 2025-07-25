@@ -7,27 +7,59 @@ import HeartLayout from "../layout/HeaderLayout";
 import ProductDetailPage from "../features/auth/pages/ProductDetailPage";
 import RegistrationUserPage from "../features/auth/pages/RegistrationUserPage";
 import RegistrationProductPage from "../features/auth/pages/RegistrationProductPage";
+import { AuthProvider } from "../contexts/AuthContext";
+import PrivateRoutes from "./PrivateRoutes";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegistrationUserPage />} />
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrationUserPage />} />
 
-    {/* Rotas aninhadas, rota pai PRODUCTS */}
-        <Route element={<HeartLayout/>}>
-          <Route path="/admin" element={<AdministratorPage />} /> 
-          <Route path="/products">
-            <Route index element={<ProductsListPage />} />
-            <Route path="register" element={<RegistrationProductPage />} />
-            <Route path=":id" element={<ProductDetailPage />} />
+          {/* Rotas aninhadas, rota pai PRODUCTS */}
+          <Route element={<HeartLayout />}>
+            <Route
+              path="/admin"
+              element={
+                <PrivateRoutes>
+                  <AdministratorPage />
+                </PrivateRoutes>
+              }
+            />
+            <Route path="/products">
+              <Route
+                index
+                element={
+                  <PrivateRoutes>
+                    <ProductsListPage />
+                  </PrivateRoutes>
+                }
+              />
+              <Route
+                path="register"
+                element={
+                  <PrivateRoutes>
+                    <RegistrationProductPage />
+                  </PrivateRoutes>
+                }
+              />
+              <Route
+                path=":id"
+                element={
+                  <PrivateRoutes>
+                    <ProductDetailPage />
+                  </PrivateRoutes>
+                }
+              />
+            </Route>
           </Route>
-        </Route>
 
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

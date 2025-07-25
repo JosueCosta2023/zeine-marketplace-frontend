@@ -3,9 +3,33 @@ import { TbChartHistogram } from "react-icons/tb";
 import { Link, NavLink } from "react-router-dom";
 import ArchiveImport from "../features/commun/ArchiveImport/ArchiveImport";
 import Button from "../components/Button";
-import { FiPlus } from "react-icons/fi";
+import { FiLogOut, FiPlus } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+import { MdAccountBox } from "react-icons/md";
+import { useAuth } from "../contexts/AuthContext";
+import { removeLocalStorage } from "../utils/helpers";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const { user, logout } = useAuth();
+
+  useEffect(() => {
+    function handleClickOutSide(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutSide);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  }, [menuOpen]);
+
   return (
     <header className=" flex items-center justify-evenly h-[64px] px-6 shadow-sm border-b-[1px] border-b-gray border-opacity-50">
       {/* Logo */}
@@ -55,16 +79,43 @@ const Header = () => {
       <div className="flex gap-3 items-center">
         <Link to="/products/register">
           <Button className="h-[40px]">
-            <FiPlus size={16} />
             Novo produto
+            <FiPlus size={16} />
           </Button>
         </Link>
 
-        <img
-          src={ArchiveImport.archives.images.personDefaultImage}
-          alt="perfil"
-          className="w-[48px] h-[48px] rounded-[12px] object-cover border border-l-primary"
-        />
+        <div className="relative" ref={menuRef}>
+          <img
+            src={user?.photo}
+            alt="perfil"
+            className="w-[48px] h-[48px] rounded-[12px] object-cover border border-l-primary"
+            onClick={() => setMenuOpen((open) => !open)}
+          />
+
+          {menuOpen && (
+            <div className="absolute right-0 mt-2 w-60 bg-white rounded shadow-lg border z-20">
+              <button
+                className="w-full items-center justify-between flex text-left px-4 py-2 hover:bg-primary/10 text-primary"
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                Minha conta
+                <MdAccountBox size={18} />
+              </button>
+              <button
+                className="w-full items-center justify-between flex text-left px-4 py-2 hover:bg-primary/10 text-primary"
+                onClick={() => {
+                  logout()
+                  setMenuOpen(false);
+                }}
+              >
+                Sair
+                <FiLogOut size={18} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
