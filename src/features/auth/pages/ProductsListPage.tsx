@@ -3,10 +3,37 @@ import CardProduct from "../components/CardProduct";
 import { BiSearch } from "react-icons/bi";
 import { BsFillTagsFill } from "react-icons/bs";
 import Button from "../../../components/Button";
-import data from "../../../services/mockApi";
+import { useEffect, useState } from "react";
+import { getProducts } from "../../../services/productService";
+import type { Product } from "../../../types/globalTypes";
+import DelayedLoading from "../../../components/DelayedLoading";
 
+type ProductsResponse = {
+  data: {
+    products: Product[];
+  };
+};
 
 const ProductsListPage = () => {
+  const [products, setProducts] = useState<ProductsResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    getProducts()
+      .then(setProducts)
+      .finally(() => setTimeout(() => {
+        if(isMounted) setLoading(false)
+      }, 1500));
+    return () => {isMounted = false}
+  }, []);
+
+  if (loading)
+    return (
+      <DelayedLoading loading={loading} minShow={2000} delay={300}>
+        <div className="text-loading text-primary bg-primartLight">Carregado Produtos...</div>
+      </DelayedLoading>
+    );
 
   return (
     <div className="flex p-20 w-full">
@@ -58,16 +85,17 @@ const ProductsListPage = () => {
           </div>
 
           <div className="w-[679px]  rounded-[20px] flex flex-wrap gap-4 ">
-            {data.map((product, key) => (
-              <Link to={`/products/${product.id}`} key={product.id}>
-                <CardProduct
-                  image={product.image}
-                  title={product.title}
-                  price={product.price}
-                  description={product.description}
-                />
-              </Link>
-            ))}
+            {products?.data.products &&
+              products?.data.products.map((product, key) => (
+                <Link to={`/products/${product.id}`} key={product.id}>
+                  <CardProduct
+                    image={product.image}
+                    title={product.title}
+                    price={product.price}
+                    description={product.description}
+                  />
+                </Link>
+              ))}
           </div>
         </div>
       </div>

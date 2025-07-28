@@ -8,6 +8,14 @@ export interface ProductFormValues {
   categoryId: string;
 }
 
+  export interface Product {
+    id: string;
+    image: string;
+    title: string;
+    price: number;
+    description: string;
+  };
+
 
 export interface UserFormsValues {
     name: string;
@@ -38,4 +46,5 @@ export interface AuthContextProps {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  loading: boolean;
 }
