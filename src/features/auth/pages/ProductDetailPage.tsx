@@ -2,16 +2,32 @@ import { Link, useParams } from "react-router-dom";
 import ProductForm from "../components/RegistrationProductForm";
 import { TbArrowLeft, TbCircleOff } from "react-icons/tb";
 import { FiCheck } from "react-icons/fi";
-import data from "../../../services/mockApi";
+import { useEffect, useState } from "react";
+import type { Product } from "../../../types/globalTypes";
+import { getProductById } from "../../../services/productService";
+import DelayedLoading from "../../../components/DelayedLoading";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true);
 
-  const product = id ? data.find((p) => String(p.id) === id) : null;
+  useEffect(() => {
+      if(!id) return
+      getProductById(id).then(setProduct).finally(() => setLoading(false))
+  }, [])
 
-  if (!product) {
-    return <div>Produto não encontrado</div>;
+  if(loading){
+    return(
+      <DelayedLoading loading={loading} minShow={600} delay={200}>
+        <div className="text-primary text-loading">Carregando detalhes do produto...</div>
+      </DelayedLoading>
+    )
   }
+
+  if(!product) return <div className="text-primary text-loading">Produto não encontrado</div>
+
+
 
   return (
     <div className="flex flex-col p-20 w-full">
@@ -33,14 +49,16 @@ const ProductDetailPage = () => {
           </div>
         </div>
       </div>
-      <ProductForm
+      {product && (
+        <ProductForm
         initialValues={{
           ...product,
           id: Number(product.id),
-          categoryId: product.categoryId,
+          categoryId: product.categoryId ?? "",
         }}
         readOnlys
       />
+      )}
     </div>
   );
 };

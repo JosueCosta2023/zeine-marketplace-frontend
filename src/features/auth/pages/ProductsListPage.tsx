@@ -24,7 +24,7 @@ const ProductsListPage = () => {
       .then(setProducts)
       .finally(() => setTimeout(() => {
         if(isMounted) setLoading(false)
-      }, 1500));
+      }, 1000));
     return () => {isMounted = false}
   }, []);
 
