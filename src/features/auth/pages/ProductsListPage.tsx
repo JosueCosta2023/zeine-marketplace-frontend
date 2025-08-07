@@ -93,6 +93,7 @@ const ProductsListPage = () => {
                     title={product.title}
                     price={product.price}
                     description={product.description}
+                    categoryId={product.categoryId}
                   />
                 </Link>
               ))}

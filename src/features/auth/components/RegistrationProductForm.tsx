@@ -71,8 +71,6 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
    * 
    */
 
-    console.log("Teste" + categories)
-
   return (
     <form onSubmit={handleSubmit} className="w-full justify-center  flex gap-6">
       {/* Left side */}
