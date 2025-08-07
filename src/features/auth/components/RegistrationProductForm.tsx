@@ -1,14 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { FiImage } from "react-icons/fi";
 import type { ProductFormValues } from "../../../types/globalTypes";
+import { getCategories } from "../../../services/categoryService";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
-  categories: Array<{id: string; name: string}>;
   readOnlys?: boolean;
   onSubmit?: (values: ProductFormValues) => void;
+}
+
+interface Category{
+  id: string;
+  name: string
 }
 
 
@@ -23,11 +28,11 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   },
   readOnlys = false,
   onSubmit,
-  categories
 }) => {
   const [values, setValues] = React.useState<ProductFormValues>(initialValues);
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [categories, setCategories] = useState<Category[]>([])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +49,11 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    getCategories().then(setCategories)
+  }, [])
+
+  useEffect(() => {
     setImage(initialValues.image || null);
     setValues(initialValues);
   }, [initialValues?.id]);
@@ -61,6 +70,8 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
    * 
    * 
    */
+
+    console.log("Teste" + categories)
 
   return (
     <form onSubmit={handleSubmit} className="w-full justify-center  flex gap-6">

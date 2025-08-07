@@ -6,17 +6,15 @@ import { useEffect, useState } from "react";
 import type { Product } from "../../../types/globalTypes";
 import { getProductById } from "../../../services/productService";
 import DelayedLoading from "../../../components/DelayedLoading";
-import { getCategories } from "../../../services/categoryService";
 
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState([])
+  
 
   useEffect(() => {
-      getCategories().then(setCategories)
       if(!id) return
       getProductById(id).then(setProduct).finally(() => setLoading(false))
   }, [])
@@ -62,7 +60,6 @@ const ProductDetailPage = () => {
           id: Number(product.id),
           categoryId: product.categoryId ?? "",
         }}
-        categories={categories}
         readOnlys
       />
       )}
