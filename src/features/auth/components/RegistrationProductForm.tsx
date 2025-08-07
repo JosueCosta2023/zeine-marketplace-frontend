@@ -6,6 +6,7 @@ import type { ProductFormValues } from "../../../types/globalTypes";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
+  categories: Array<{id: string; name: string}>;
   readOnlys?: boolean;
   onSubmit?: (values: ProductFormValues) => void;
 }
@@ -22,6 +23,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   },
   readOnlys = false,
   onSubmit,
+  categories
 }) => {
   const [values, setValues] = React.useState<ProductFormValues>(initialValues);
   const [image, setImage] = useState<string | null>(null);
@@ -137,13 +139,12 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
               setValues({ ...values, categoryId: e.target.value })
             }
           >
-            <option value="">Selecione</option>
-            <option value="MOVEL">Móvel</option>
-            <option value="BRINQUEDOS">Brinquedos</option>
-            <option value="PAPELARIA">Papelaria</option>
-            <option value="SAUDE E BELEZA">Saude e Beleza</option>
-            <option value="UTENSILIO">Utensílio</option>
-            <option value="VESTUARIO">Vestuario</option>
+          <option value="">Selecione uma categoria</option>
+          {categories.map(cat => (
+            <option value={cat.id} key={cat.id}>
+              {cat.name}
+            </option>
+          ))}
           </select>
         </div>
 
