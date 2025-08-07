@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getCategoryById } from "../../../services/categoryService"
+import { getCategories, getCategoryById } from "../../../services/categoryService"
 
 interface CardProdutProsp{
     image: string,
@@ -12,23 +12,24 @@ interface CardProdutProsp{
 
 
 const CardProduct = ({image, title, price, description, categoryId}: CardProdutProsp) => {
-    
-    const [category, setCategory] = useState<{id: string; name: string } | null>(null)
+      const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
+    const [categoryName, setCategoryName] = useState<string>("Sem Categoria");
 
     useEffect(() => {
-        if(categoryId){
-            getCategoryById(categoryId).then(setCategory)
-        }
-    }, [categoryId])
+        getCategories().then((cats) => {
+            setCategories(cats);
+            const found = cats.find((cat: { id: string; name: string }) => cat.id === categoryId);
+            setCategoryName(found ? found.name : "Sem Categoria");
+        });
+    }, [categoryId]);
 
-    console.log(category)
 
 
     return(
         <div className="w-[331px] h-[250px] relative flex flex-col bg-white rounded-[20px]">
             <div className="absolute flex right-3 top-3 gap-2">
                 <span className="px-[8px] py-[4px] rounded-xl bg-secondary text-white text-[10px] font-semibold">ANUNCIADO</span>
-                <span className="px-[8px] py-[4px] rounded-xl bg-dark text-white text-[10px] font-semibold">{category ? category?.name : "Sem Categoria"}</span>
+                <span className="px-[8px] py-[4px] rounded-xl bg-dark text-white text-[10px] font-semibold">{categoryName.toLocaleUpperCase()}</span>
                 
             </div>
             <div className="w-full h-[144px] rounded-[26px] mb-3">
