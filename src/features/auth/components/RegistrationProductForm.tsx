@@ -4,6 +4,7 @@ import Button from "../../../components/Button";
 import { FiImage } from "react-icons/fi";
 import type { ProductFormValues } from "../../../types/globalTypes";
 import { getCategories } from "../../../services/categoryService";
+import { BiEditAlt } from "react-icons/bi";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
@@ -22,7 +23,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
     title: "",
     price: 0,
     description: "",
-    image: "",
+    photo: "",
     categoryId: "",
     status: "",
   },
@@ -30,7 +31,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   onSubmit,
 }) => {
   const [values, setValues] = React.useState<ProductFormValues>(initialValues);
-  const [image, setImage] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [categories, setCategories] = useState<Category[]>([])
 
@@ -43,7 +44,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
 
-      reader.onload = (ev) => setImage(ev.target?.result as string);
+      reader.onload = (ev) => setPhoto(ev.target?.result as string);
 
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -54,7 +55,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   }, [])
 
   useEffect(() => {
-    setImage(initialValues.image || null);
+    setPhoto(initialValues.photo || null);
     setValues(initialValues);
   }, [initialValues?.id]);
 
@@ -80,13 +81,14 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
         tabIndex={0}
         aria-label="Selecione a imagem do produto"
       >
-        {image ? (
+        {photo ? (
           <>
             <img
-              src={image}
+              src={photo}
               alt="Imagem de produto"
-              className="w-full h-full rounded-[20px] p-1 shadow"
+              className="w-full h-full rounded-[20px] p-1 shadow object-cover"
             />
+            <span className="absolute bottom-3"><BiEditAlt size={22}/></span>
           </>
         ) : (
           <div className="flex flex-col items-center gap-2">

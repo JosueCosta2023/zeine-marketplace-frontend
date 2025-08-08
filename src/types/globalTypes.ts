@@ -3,7 +3,7 @@ export interface ProductFormValues {
   title: string;
   price: number;
   description: string;
-  image?: string;
+  photo?: string;
   status?: string;
   categoryId: string;
 }
@@ -13,6 +13,7 @@ export interface ProductFormValues {
     image: string;
     title: string;
     price: number;
+    photo: string;
     description: string;
     categoryId?: string;
     status?: string;

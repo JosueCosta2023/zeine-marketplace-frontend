@@ -35,6 +35,8 @@ const ProductsListPage = () => {
       </DelayedLoading>
     );
 
+    console.log(products)
+
   return (
     <div className="flex p-20 w-full">
       <div className="flex flex-col w-full">
@@ -86,10 +88,10 @@ const ProductsListPage = () => {
 
           <div className="w-[679px]  rounded-[20px] flex flex-wrap gap-4 ">
             {products?.data.products &&
-              products?.data.products.map((product, key) => (
+              products?.data.products.map((product) => (
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <CardProduct
-                    image={product.image}
+                    image={product.photo}
                     title={product.title}
                     price={product.price}
                     description={product.description}
