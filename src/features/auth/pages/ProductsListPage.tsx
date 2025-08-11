@@ -35,8 +35,6 @@ const ProductsListPage = () => {
       </DelayedLoading>
     );
 
-    console.log(products)
-
   return (
     <div className="flex p-20 w-full">
       <div className="flex flex-col w-full">

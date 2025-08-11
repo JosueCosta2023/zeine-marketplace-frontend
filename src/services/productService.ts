@@ -20,12 +20,13 @@ export const getProductById = async (id: string) => {
         return response.data.result
         
     } catch (error) {
-        throw new Error(`Falha ao carrega produto: ${error}`)
+        throw new Error(`Falha ao carregar produto: ${error}`)
     }
 }
 
 export const createProduct = async (data: ProductFormValues) => {
     try {
+        console.log("dados do formulario", data)
         const response = await api.post("/product", data)
         return response.data
         

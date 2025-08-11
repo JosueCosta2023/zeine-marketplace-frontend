@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getCategories, getCategoryById } from "../../../services/categoryService"
+import { getCategories } from "../../../services/categoryService"
 
 interface CardProdutProsp{
     image: string,

@@ -22,7 +22,7 @@ const Input = ({ label, icon, error, helperTxt, required, ...props }: InputProps
         <input 
           id={inputIdAccessbility}
           type="text" 
-          className="w-full bg-transparent py-3 px-2 outline-none "
+          className="w-full outline-none "
           aria-invalid={error ? "true" : "false"}
           aria-describedby={error ? `${inputIdAccessbility}-error` : helperTxt ?  `${inputIdAccessbility}-helper`: undefined} 
           {...props} 
