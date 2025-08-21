@@ -6,6 +6,7 @@ export interface ProductFormValues {
   photo?: string;
   status?: string;
   categoryId: string;
+  userId: string;
 }
 
   export interface Product {

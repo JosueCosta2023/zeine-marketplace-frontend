@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { createProduct } from "../../../services/productService";
 import RegistrationProductForm from "../components/RegistrationProductForm";
 import type { ProductFormValues } from "../../../types/globalTypes";
+import { useAuth } from "../../../contexts/AuthContext";
 
 
 const RegistrationProductPage = () => {
 
   const navigate = useNavigate();
+  const user = useAuth()
 
   const handleSubmit = async (values: ProductFormValues) => {
     try {
@@ -24,7 +26,7 @@ const RegistrationProductPage = () => {
         <h3 className="text-2xl text-darkLight font-bold">Novo Produto</h3>
         <p>Cadastre um produto para venda no marketplace</p>
       </div>
-      <RegistrationProductForm onSubmit={handleSubmit} />
+      <RegistrationProductForm onSubmit={handleSubmit} userId={user?.user?.id} />
     </div>
   );
 };

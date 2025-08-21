@@ -5,12 +5,13 @@ import { FiImage } from "react-icons/fi";
 import type { ProductFormValues } from "../../../types/globalTypes";
 import { getCategories } from "../../../services/categoryService";
 import { BiEditAlt } from "react-icons/bi";
-import {sha256} from "js-sha256"
+import { useAuth } from "../../../contexts/AuthContext";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
   readOnlys?: boolean;
   onSubmit?: (values: ProductFormValues) => void;
+  userId?: string
 }
 
 interface Category {
@@ -26,6 +27,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
     photo: "",
     categoryId: "",
     status: "",
+    userId: ""
   },
   readOnlys = false,
   onSubmit,
@@ -36,16 +38,27 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   const [categories, setCategories] = useState<Category[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const {user} = useAuth()
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    
+    const currentUserId = user?.id
 
-    const photoHash = sha256(photo || "")
+    console.log("Produtos do formulario front", values)
 
-    if (onSubmit) onSubmit({...values, photo: photoHash || "", status: values.status || "ANUNCIADO"});
+    if (onSubmit) onSubmit({
+        ...values, 
+        photo: photo || "", 
+        status: values.status || "ANUNCIADO",
+        userId: currentUserId || ""
+      });
+
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     if (e.target.files && e.target.files[0]) {
 
     const file = e.target.files[0];
@@ -90,7 +103,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
       !values.categoryId ||
       !photo
     ) {
-      setError("Este campo e obrigatorio.");
+      setError("Campos com o sinal * são obrigatórios.");
       return false;
     }
 
@@ -113,7 +126,9 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
       {/* Left side */}
       <div
         className="w-[415px] h-[340px] rounded-[10px] bg-gray-100 flex items-center justify-center cursor-pointer overflow-hidden bg-primartLight text-primary relative"
-        onClick={() => fileInputRef.current?.click()}
+        onClick={() => 
+          fileInputRef.current?.click()
+        }
         tabIndex={0}
         aria-label="Selecione a imagem do produto"
       >
@@ -146,6 +161,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
       {/* right side */}
       <div className="bg-white rounded-[20px] p-[32px] w-[591px] h-[490px]">
         <h3 className="mb-6">Dados do produto</h3>
+        
         <div className="flex gap-7 ">
           <div className="w-full bg-transparent py-3 px-2 outline-none ">
             <Input
@@ -156,7 +172,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
               onChange={(e) => setValues({ ...values, title: e.target.value })}
               aria-readonly={readOnlys}
             />
-            {error && <div className="text-red-500 mb-4 text-[10px]">{error}</div>}
+            
           </div>
 
           <div className="w-full bg-transparent py-3 px-2 outline-none ">
@@ -171,7 +187,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
               }
               aria-readonly={readOnlys}
             />
-            {error && <div className="text-red-500 mb-4 text-[10px]">{error}</div>}
+            
           </div>
         </div>
 
@@ -187,7 +203,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
             aria-readonly={readOnlys}
           />
 
-          {error && <div className="text-red-500 mb-4 text-[10px]">{error}</div>}
+          
         </div>
 
         <div className="w-full border-b border-b-grayScale/50">
@@ -224,6 +240,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
             </span>
           </Button>
         </div>
+        {error && <div className="text-red-500 mt-4 text-[10px]">{error}</div>}
       </div>
     </form>
   );

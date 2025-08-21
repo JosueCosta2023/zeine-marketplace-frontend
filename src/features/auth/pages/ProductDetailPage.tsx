@@ -1,23 +1,42 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import RegistrationProductForm from "../components/RegistrationProductForm";
 import { TbArrowLeft, TbCircleOff } from "react-icons/tb";
 import { FiCheck } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import type { Product } from "../../../types/globalTypes";
-import { getProductById } from "../../../services/productService";
+import type { ProductFormValues } from "../../../types/globalTypes";
+import { getProductById, updateProduct } from "../../../services/productService";
 import DelayedLoading from "../../../components/DelayedLoading";
 
 
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState<Product | null>(null)
+  const [product, setProduct] = useState<ProductFormValues | null>(null)
   const [loading, setLoading] = useState(true);
-  
+  const [showSuccess, setShowSuccess] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
       if(!id) return
       getProductById(id).then(setProduct).finally(() => setLoading(false))
   }, [])
+
+  const handleUpdateProduct = async (updatedProduct: ProductFormValues) => {
+    try {
+      await updateProduct(id!, updatedProduct);
+      console.log("Produto atualizado com sucesso!")
+
+      setShowSuccess(true)
+
+      setTimeout(() => {
+        setShowSuccess(false)
+        navigate("/products")
+      }, 3000);
+
+    } catch (error) {
+      console.error("Erro ao atualizar produto: ", error)
+    }
+
+  }
 
 
 
@@ -34,7 +53,15 @@ const ProductDetailPage = () => {
 
 
   return (
-    <div className="flex flex-col p-20 w-full">
+    <div className="flex flex-col p-20 w-full relative">
+      {
+        showSuccess && (
+          <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2 animate-fade-in">
+            <FiCheck size={18}/>
+            Produto atualizado com sucesso!
+          </div>
+        )
+      }
       <div className="w-full mb-10">
         <Link to={"/products"} className="flex gap-3 items-center text-primary">
           <TbArrowLeft />
@@ -57,10 +84,11 @@ const ProductDetailPage = () => {
         <RegistrationProductForm
         initialValues={{
           ...product,
-          id: Number(product.id),
           categoryId: product.categoryId ?? "",
+          userId: product.userId || "",
         }}
-        readOnlys
+        readOnlys={false}
+        onSubmit={handleUpdateProduct}
       />
       )}
     </div>
