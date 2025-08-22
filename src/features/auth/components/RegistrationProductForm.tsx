@@ -11,7 +11,8 @@ interface ProductFormProsp {
   initialValues?: ProductFormValues;
   readOnlys?: boolean;
   onSubmit?: (values: ProductFormValues) => void;
-  userId?: string
+  userId?: string;
+  currentStatus?: string
 }
 
 interface Category {
@@ -27,10 +28,11 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
     photo: "",
     categoryId: "",
     status: "",
-    userId: ""
+    userId: "",
   },
   readOnlys = false,
   onSubmit,
+  currentStatus
 }) => {
   const [values, setValues] = React.useState<ProductFormValues>(initialValues);
   const [photo, setPhoto] = useState<string | null>(null);
@@ -38,62 +40,57 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   const [categories, setCategories] = useState<Category[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const {user} = useAuth()
+  const { user } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    
-    const currentUserId = user?.id
 
-    console.log("Produtos do formulario front", values)
+    const currentUserId = user?.id;
 
-    if (onSubmit) onSubmit({
-        ...values, 
-        photo: photo || "", 
+    console.log("Produtos do formulario front", values);
+
+    if (onSubmit)
+      onSubmit({
+        ...values,
+        photo: photo || "",
         status: values.status || "ANUNCIADO",
-        userId: currentUserId || ""
+        userId: currentUserId || "",
       });
-
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
 
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-
-    if(file.size > 500 * 1024){
-      setError("A imagem deve ter no maximo 500kb");
-      return
-    }
-
-
-    reader.onload = (ev) => {
-      const img = new window.Image();
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-
-        const ctx = canvas.getContext("2d");
-
-        if(ctx){
-          ctx.drawImage(img, 0, 0);
-
-          const webDataUrl = canvas.toDataURL("image/webp", 0.8)
-          setPhoto(webDataUrl)
-         }
-
+      if (file.size > 500 * 1024) {
+        setError("A imagem deve ter no maximo 500kb");
+        return;
       }
-      img.src = ev.target?.result as string;
+
+      reader.onload = (ev) => {
+        const img = new window.Image();
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          const ctx = canvas.getContext("2d");
+
+          if (ctx) {
+            ctx.drawImage(img, 0, 0);
+
+            const webDataUrl = canvas.toDataURL("image/webp", 0.8);
+            setPhoto(webDataUrl);
+          }
+        };
+        img.src = ev.target?.result as string;
+      };
+      reader.readAsDataURL(file);
     }
-    reader.readAsDataURL(file)
-  } 
-};
+  };
 
   const validate = () => {
     if (
@@ -116,19 +113,22 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   }, []);
 
   useEffect(() => {
+      if(currentStatus){
+        setValues(prev => ({...prev, status: currentStatus}))
+      }
+  }, [currentStatus])
+
+  useEffect(() => {
     setPhoto(initialValues.photo || null);
     setValues(initialValues);
   }, [initialValues?.id]);
-
 
   return (
     <form onSubmit={handleSubmit} className="w-full justify-center  flex gap-6">
       {/* Left side */}
       <div
         className="w-[415px] h-[340px] rounded-[10px] bg-gray-100 flex items-center justify-center cursor-pointer overflow-hidden bg-primartLight text-primary relative"
-        onClick={() => 
-          fileInputRef.current?.click()
-        }
+        onClick={() => fileInputRef.current?.click()}
         tabIndex={0}
         aria-label="Selecione a imagem do produto"
       >
@@ -160,8 +160,23 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
 
       {/* right side */}
       <div className="bg-white rounded-[20px] p-[32px] w-[591px] h-[490px]">
-        <h3 className="mb-6">Dados do produto</h3>
-        
+        <div className="flex justify-between">
+          <h3 className="mb-6">Dados do produto</h3>
+          <div>
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                currentStatus === "ANUNCIADO" || values.status === "ANUNCIADO"
+                  ? "bg-blue-100 text-blue-800"
+                  : currentStatus === "VENDIDO" || values.status === "VENDIDO"
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}
+            >
+              {currentStatus || values.status}
+            </span>
+          </div>
+        </div>
+
         <div className="flex gap-7 ">
           <div className="w-full bg-transparent py-3 px-2 outline-none ">
             <Input
@@ -172,7 +187,6 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
               onChange={(e) => setValues({ ...values, title: e.target.value })}
               aria-readonly={readOnlys}
             />
-            
           </div>
 
           <div className="w-full bg-transparent py-3 px-2 outline-none ">
@@ -187,7 +201,6 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
               }
               aria-readonly={readOnlys}
             />
-            
           </div>
         </div>
 
@@ -202,8 +215,6 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
             }
             aria-readonly={readOnlys}
           />
-
-          
         </div>
 
         <div className="w-full border-b border-b-grayScale/50">
