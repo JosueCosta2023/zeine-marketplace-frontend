@@ -23,11 +23,25 @@ const ProductDetailPage = () => {
     if (!id) return;
     getProductById(id)
       .then((data) => {
-        setProduct(data);
-        setProductStatus(data.status || "ANUNCIADO");
+        const normalizeStatus = data.status || "ANUNCIADO";
+        setProduct({
+          ...data,
+          status: normalizeStatus,
+        });
+        setProductStatus(normalizeStatus);
+
+        if (!data.status || data.status.trim() === "") {
+          updateProduct(id, {
+            ...data,
+            status: normalizeStatus,
+          }).catch((error) => {
+            console.error("Erro ao normalizar status:", error);
+          });
+        }
       })
+
       .finally(() => setLoading(false));
-  }, []);
+  }, [id]);
 
   const handleUpdateProduct = async (updatedProduct: ProductFormValues) => {
     try {
@@ -126,9 +140,9 @@ const ProductDetailPage = () => {
         </Link>
         <h3 className="text-2xl text-darkLight font-bold">Editar Produto</h3>
         <div className="w-full flex justify-between">
-          <p>Gerencie as informações do produto cadastrado</p>
+          <p>Gerenciar as informações do {product.title}.</p>
           <div className="flex gap-5">
-              <label
+            <label
               htmlFor="vendido"
               className={`flex items-center gap-1 cursor-pointer font-bold transition-all duration-200 ${
                 productStatus === "CANCELADO"
@@ -145,22 +159,22 @@ const ProductDetailPage = () => {
                 disabled={productStatus === "CANCELADO"}
               />
               <span className="flex items-center gap-1">
-            {productStatus === "VENDIDO"? (
-              <MdDoneAll size={18}/>
-            ) : (
-              <FiCheck size={16}/>
-            )}
+                {productStatus === "VENDIDO" ? (
+                  <MdDoneAll size={18} />
+                ) : (
+                  <FiCheck size={16} />
+                )}
                 <span>Marcar como vendido</span>
               </span>
             </label>
 
-            <label 
+            <label
               htmlFor="cancelado"
               className="flex items-center gap-1 text-primary cursor-pointer font-bold hover:text-primary/80 transition-all duration-200"
-              title="Clique para ativar ou desativar anuncio"            
+              title="Clique para ativar ou desativar anuncio"
             >
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 id="cancelado"
                 className="hidden"
                 checked={productStatus === "CANCELADO"}
@@ -169,15 +183,15 @@ const ProductDetailPage = () => {
 
               <span className="flex items-center gap-1">
                 {productStatus === "CANCELADO" ? (
-                  <TbCircleOff size={18} className="text-red-600"/>
+                  <TbCircleOff size={18} className="text-red-600" />
                 ) : (
-                  <TbCircleOff size={18}/>
+                  <TbCircleOff size={18} />
                 )}
                 <span>
-                  {productStatus === "CANCELADO" ? "Ativar" : "Cancelar"} Anuncio
+                  {productStatus === "CANCELADO" ? "Ativar" : "Cancelar"}{" "}
+                  Anuncio
                 </span>
               </span>
-
             </label>
           </div>
         </div>

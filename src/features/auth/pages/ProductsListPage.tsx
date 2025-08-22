@@ -28,12 +28,15 @@ const ProductsListPage = () => {
     return () => {isMounted = false}
   }, []);
 
+
   if (loading)
     return (
       <DelayedLoading loading={loading} minShow={2000} delay={300}>
-        <div className="text-loading text-primary bg-primartLight">Carregado Produtos...</div>
+        <div className="text-loading text-primary ">Carregado Produtos...</div>
       </DelayedLoading>
     );
+
+    console.log(products)
 
   return (
     <div className="flex p-20 w-full">
@@ -94,6 +97,7 @@ const ProductsListPage = () => {
                     price={product.price}
                     description={product.description}
                     categoryId={product.categoryId}
+                    status={product.status}
                   />
                 </Link>
               ))}

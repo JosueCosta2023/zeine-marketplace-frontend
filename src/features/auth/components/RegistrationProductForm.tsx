@@ -6,6 +6,7 @@ import type { ProductFormValues } from "../../../types/globalTypes";
 import { getCategories } from "../../../services/categoryService";
 import { BiEditAlt } from "react-icons/bi";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
@@ -39,6 +40,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate()
 
   const { user } = useAuth();
 
@@ -122,6 +124,10 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
     setPhoto(initialValues.photo || null);
     setValues(initialValues);
   }, [initialValues?.id]);
+
+  const handleHome = () => {
+    navigate("/products")
+  }
 
   return (
     <form onSubmit={handleSubmit} className="w-full justify-center  flex gap-6">
@@ -241,7 +247,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
         </div>
 
         <div className="w-full flex gap-3 mt-[40px]">
-          <Button className="h-[48px]">
+          <Button className="h-[48px]" onClick={handleHome}>
             <span className="flex w-full justify-center ">Cancelar</span>
           </Button>
 
