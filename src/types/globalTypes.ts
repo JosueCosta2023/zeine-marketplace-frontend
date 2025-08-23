@@ -9,6 +9,12 @@ export interface ProductFormValues {
   userId: string;
 }
 
+export interface ProductFilters {
+  id?: string;
+  categoryId?: string;
+  status?: string
+}
+
   export interface Product {
     id: string;
     image: string;

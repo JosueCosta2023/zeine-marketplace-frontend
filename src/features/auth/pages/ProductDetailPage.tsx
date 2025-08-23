@@ -5,7 +5,7 @@ import { FiCheck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import type { ProductFormValues } from "../../../types/globalTypes";
 import {
-  getProductById,
+  fetchProduct,
   updateProduct,
 } from "../../../services/productService";
 import DelayedLoading from "../../../components/DelayedLoading";
@@ -21,7 +21,7 @@ const ProductDetailPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    getProductById(id)
+    fetchProduct({id})
       .then((data) => {
         const normalizeStatus = data.status || "ANUNCIADO";
         setProduct({

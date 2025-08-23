@@ -4,29 +4,53 @@ import { BiSearch } from "react-icons/bi";
 import { BsFillTagsFill } from "react-icons/bs";
 import Button from "../../../components/Button";
 import { useEffect, useState } from "react";
-import { getProducts } from "../../../services/productService";
+import { fetchProduct } from "../../../services/productService";
 import type { Product } from "../../../types/globalTypes";
 import DelayedLoading from "../../../components/DelayedLoading";
 
-type ProductsResponse = {
-  data: {
-    products: Product[];
-  };
-};
 
 const ProductsListPage = () => {
-  const [products, setProducts] = useState<ProductsResponse | null>(null);
+  const [products, setProducts] = useState<Product[] | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const [categorySearch, setCategorySearch] = useState("")
+  const [status, setStatus] = useState("")
+
+  const loadProducts = async (filters = {}) => {
+    setLoading(true);
+
+    try {
+
+      const response = await fetchProduct(filters)
+
+      const productsData = response?.data?.products || response;
+
+      setProducts(productsData)
+      
+    } catch (error) {
+      throw new Error(`Erro ao carregas produto(s): ${error}`)
+    } finally {
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000);
+    }
+  }
+
   useEffect(() => {
-    let isMounted = true;
-    getProducts()
-      .then(setProducts)
-      .finally(() => setTimeout(() => {
-        if(isMounted) setLoading(false)
-      }, 1000));
-    return () => {isMounted = false}
-  }, []);
+    loadProducts()
+  }, [])
+
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   fetchProduct()
+  //     .then(setProducts)
+  //     .finally(() => setTimeout(() => {
+  //       if(isMounted) setLoading(false)
+  //     }, 1000));
+  //   return () => {isMounted = false}
+  // }, []);
+
+
 
 
   if (loading)
@@ -62,6 +86,8 @@ const ProductsListPage = () => {
                 id="search"
                 placeholder="Pesquisar Categoria"
                 className="w-full text-[16px] outline-none px-3 bg-transparent"
+                value={categorySearch}
+                onChange={(e) => setCategorySearch(e.target.value)}
               />
             </div>
             <div className="w-full border-b-[1px] border-b-slate-400/40 flex items-center gap-1 h-[48px]">
@@ -71,6 +97,8 @@ const ProductsListPage = () => {
               <select
                 name=""
                 id="select"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
                 className="w-full outline-none text-grayScale p-3"
               >
                 <option value="">Status</option>
@@ -88,8 +116,7 @@ const ProductsListPage = () => {
           </div>
 
           <div className="w-[679px]  rounded-[20px] flex flex-wrap gap-4 ">
-            {products?.data.products &&
-              products?.data.products.map((product) => (
+            {products?.map((product) => (
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <CardProduct
                     image={product.photo}
