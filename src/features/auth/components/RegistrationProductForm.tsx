@@ -13,7 +13,7 @@ interface ProductFormProsp {
   readOnlys?: boolean;
   onSubmit?: (values: ProductFormValues) => void;
   userId?: string;
-  currentStatus?: string
+  currentStatus?: string;
 }
 
 interface Category {
@@ -33,14 +33,14 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   },
   readOnlys = false,
   onSubmit,
-  currentStatus
+  currentStatus,
 }) => {
   const [values, setValues] = React.useState<ProductFormValues>(initialValues);
   const [photo, setPhoto] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { user } = useAuth();
 
@@ -115,10 +115,10 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   }, []);
 
   useEffect(() => {
-      if(currentStatus){
-        setValues(prev => ({...prev, status: currentStatus}))
-      }
-  }, [currentStatus])
+    if (currentStatus) {
+      setValues((prev) => ({ ...prev, status: currentStatus }));
+    }
+  }, [currentStatus]);
 
   useEffect(() => {
     setPhoto(initialValues.photo || null);
@@ -126,8 +126,8 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
   }, [initialValues?.id]);
 
   const handleHome = () => {
-    navigate("/products")
-  }
+    navigate("/products");
+  };
 
   return (
     <form onSubmit={handleSubmit} className="w-full justify-center  flex gap-6">
@@ -167,7 +167,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
       {/* right side */}
       <div className="bg-white rounded-[20px] p-[32px] w-[591px] h-[490px]">
         <div className="flex justify-between">
-          <h3 className="mb-6">Dados do produto</h3>
+          <h3 className="mb-6 font-bold text-grayScale/30">Dados do produto</h3>
           <div>
             <span
               className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -195,7 +195,32 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
             />
           </div>
 
-          <div className="w-full bg-transparent py-3 px-2 outline-none ">
+              <div className="w-full bg-transparent py-3 px-2 outline-none relative">
+  <label htmlFor="price" className="font-medium">
+    Valor *
+  </label>
+  <div className="w-full bg-transparent px-2 outline-none relative ">
+    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary font-bold text-sm z-10 select-none">
+      R$
+    </span>
+    <input
+      id="price"
+      type="number"
+      placeholder="0,00"
+      className="w-full border-b border-b-grayScale/50 pl-10 pr-3 py-2 bg-transparent outline-none text-grayScale focus:border-primary transition-colors"
+      value={values.price || ""}
+      onChange={(e) =>
+        setValues({ ...values, price: Number(e.target.value) })
+      }
+      readOnly={readOnlys}
+      required
+      min="0"
+      step="0.01"
+    />
+  </div>
+</div>
+          {/* <div className="w-full bg-transparent py-3 px-2 outline-none relative ">
+      
             <Input
               label="Valor"
               required
@@ -207,7 +232,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
               }
               aria-readonly={readOnlys}
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="w-full bg-transparent py-3 px-2 outline-none ">
