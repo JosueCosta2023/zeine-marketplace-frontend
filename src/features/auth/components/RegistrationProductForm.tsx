@@ -165,7 +165,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
       </div>
 
       {/* right side */}
-      <div className="bg-white rounded-[20px] p-[32px] w-[591px] h-[490px]">
+      <div className="bg-white rounded-[20px] p-[32px] w-[591px] ">
         <div className="flex justify-between">
           <h3 className="mb-6 font-bold text-grayScale/30">Dados do produto</h3>
           <div>
@@ -195,58 +195,55 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
             />
           </div>
 
-              <div className="w-full bg-transparent py-3 px-2 outline-none relative">
-  <label htmlFor="price" className="font-medium">
-    Valor *
-  </label>
-  <div className="w-full bg-transparent px-2 outline-none relative ">
-    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary font-bold text-sm z-10 select-none">
-      R$
-    </span>
-    <input
-      id="price"
-      type="number"
-      placeholder="0,00"
-      className="w-full border-b border-b-grayScale/50 pl-10 pr-3 py-2 bg-transparent outline-none text-grayScale focus:border-primary transition-colors"
-      value={values.price || ""}
-      onChange={(e) =>
-        setValues({ ...values, price: Number(e.target.value) })
-      }
-      readOnly={readOnlys}
-      required
-      min="0"
-      step="0.01"
-    />
-  </div>
-</div>
-          {/* <div className="w-full bg-transparent py-3 px-2 outline-none relative ">
-      
-            <Input
-              label="Valor"
-              required
-              type="number"
-              placeholder="R$: 000.00"
-              value={values.price}
-              onChange={(e) =>
-                setValues({ ...values, price: Number(e.target.value) })
-              }
-              aria-readonly={readOnlys}
-            />
-          </div> */}
+          <div className="w-full bg-transparent py-3 px-2 outline-none relative">
+            <label htmlFor="price" className="font-medium text-grayScale">
+              Valor *
+            </label>
+            <div className="w-full bg-transparent px-2 outline-none relative ">
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary font-bold text-sm z-10 select-none">
+                R$
+              </span>
+              <input
+                id="price"
+                type="number"
+                placeholder="0,00"
+                className="w-full border-b border-b-grayScale/50 pl-10 pr-3 py-2 bg-transparent outline-none text-grayScale focus:border-primary transition-colors"
+                value={values.price || ""}
+                onChange={(e) =>
+                  setValues({ ...values, price: Number(e.target.value) })
+                }
+                readOnly={readOnlys}
+                required
+                min="0"
+                step="0.01"
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="w-full bg-transparent py-3 px-2 outline-none ">
-          <Input
-            label="Descrição"
-            required
-            type="text"
-            value={values.description}
-            onChange={(e) =>
-              setValues({ ...values, description: e.target.value })
-            }
-            aria-readonly={readOnlys}
-          />
-        </div>
+
+        <div className="w-full bg-transparent py-3 px-2 outline-none">
+  <label htmlFor="description" className="text-grayScale font-medium block mb-1">
+    Descrição *
+  </label>
+  <textarea
+    id="description"
+    placeholder="Digite a descrição do produto..."
+    className="w-full border-b border-b-grayScale/50 py-3 bg-transparent outline-none text-grayScale focus:border-primary transition-colors resize-none min-h-[80px]"
+    value={values.description}
+    onChange={(e) =>
+      setValues({ ...values, description: e.target.value })
+    }
+    readOnly={readOnlys}
+    required
+    rows={3}
+    wrap="soft"
+    maxLength={500}
+  />
+  <div className="text-xs text-grayScale/60 mt-1 text-right">
+    {values.description.length}/500 caracteres
+  </div>
+</div>
 
         <div className="w-full border-b border-b-grayScale/50">
           <label htmlFor="select" className="text-primary font-medium">
