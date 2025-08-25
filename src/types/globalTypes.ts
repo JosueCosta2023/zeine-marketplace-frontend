@@ -12,7 +12,8 @@ export interface ProductFormValues {
 export interface ProductFilters {
   id?: string;
   categoryId?: string;
-  status?: string
+  status?: string;
+  categoryName?: string;
 }
 
   export interface Product {

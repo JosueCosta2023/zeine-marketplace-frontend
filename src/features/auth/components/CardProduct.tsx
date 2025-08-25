@@ -51,7 +51,7 @@ const CardProduct = ({image, title, price, description, categoryId, status}: Car
                 <span>R$: {price}</span>
             </div>
 
-            <p className="text-grayScale text-sm px-2">{description}</p>
+            <p className="text-grayScale text-sm px-2 line-clamp-2">{description}</p>
         </div>
 
     )
