@@ -11,12 +11,15 @@ import {
 import Input from "../../../components/Input";
 import { useRef, useState } from "react";
 import Button from "../../../components/Button";
+import PasswordValidate from "../../../components/PasswordValidate";
 
 const RegistrationUserForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [passwd, setPasswd] = useState("");
+  const [confirmPasswd, setConfirmPasswd] = useState("");
 
   const handleSubmitRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,19 +34,6 @@ const RegistrationUserForm = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
-
-  // Campos necessarios em um novo cadastro
-
-  /* 
-  {
-  "name": "João Silva",
-  "email": "joao@email.com",
-  "password": "suasenha123",
-  "phone": "(11) 99999-9999",
-  "photo": "https://example.com/foto.jpg"
-  }
-  */
 
   return (
     <form onSubmit={handleSubmitRegister} className="mb-[80px] mt-[40px]">
@@ -112,6 +102,8 @@ const RegistrationUserForm = () => {
         <div className="relative mb-4">
           <Input
             label="Senha"
+            value={passwd}
+            onChange={(e) => setPasswd(e.target.value)}
             type={showPassword ? "text" : "password"}
             placeholder="Crie sua senha de acesso"
             icon={<FiLock />}
@@ -121,7 +113,7 @@ const RegistrationUserForm = () => {
 
           <button
             type="button"
-            className="absolute right-3 top-12 text-gray-400"
+            className="absolute right-3 top-10 text-gray-400"
             onClick={() => setShowPassword((prev) => !prev)}
             tabIndex={0}
             aria-label={showPassword ? "Ocultar senha" : "Exibir senha"}
@@ -129,9 +121,12 @@ const RegistrationUserForm = () => {
             {showPassword ? <FiEyeOff /> : <FiEye />}
           </button>
         </div>
+
         <div className="relative mb-4">
           <Input
             label="Confirmar Senha"
+            value={confirmPasswd}
+            onChange={(e) => setConfirmPasswd(e.target.value)}
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confime sua senha de acesso"
             icon={<FiLock />}
@@ -141,7 +136,7 @@ const RegistrationUserForm = () => {
 
           <button
             type="button"
-            className="absolute right-3 top-12 text-gray-400"
+            className="absolute right-3 top-10 text-gray-400"
             onClick={() => setShowConfirmPassword((prev) => !prev)}
             tabIndex={0}
             aria-label={showConfirmPassword ? "Ocultar senha" : "Exibir senha"}
@@ -149,6 +144,8 @@ const RegistrationUserForm = () => {
             {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
           </button>
         </div>
+
+        <PasswordValidate password={passwd} confirmPassword={confirmPasswd} />
       </section>
 
       <Button type="submit">
