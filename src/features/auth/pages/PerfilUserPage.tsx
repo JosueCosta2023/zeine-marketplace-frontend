@@ -239,6 +239,7 @@ const PerfilUserPage = () => {
                 <Input
                   label="Nome Completo"
                   required
+                  style={{outline: "none"}}
                   readOnly={!isEditing}
                   value={formData.name}
                   onChange={(e) =>
@@ -251,8 +252,8 @@ const PerfilUserPage = () => {
                 <Input
                   label="Email"
                   type="email"
-                  required
-                  readOnly={!isEditing}
+                  style={{color: "gray", outline: "none"}}
+                  readOnly={true}
                   value={formData.email}
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, email: e.target.value }))
@@ -269,6 +270,7 @@ const PerfilUserPage = () => {
                   label="Telefone"
                   type="tel"
                   required
+                  style={{outline: "none"}}
                   readOnly={!isEditing}
                   value={formData.phone}
                   onChange={(e) =>
@@ -283,6 +285,7 @@ const PerfilUserPage = () => {
                   type="password"
                   readOnly={!isEditing}
                   value={formData.password}
+                  style={{outline: "none"}}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,

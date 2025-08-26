@@ -17,12 +17,12 @@ const Input = ({ label, icon, error, helperTxt, required, ...props }: InputProps
       <label htmlFor={inputIdAccessbility} className="block text-sm font-medium text-grayScale mb-1">
         {label}{required && <span className="text-red-500 ml-1">*</span>}
       </label>
-      <div className="flex items-center border-b border-gray py-2">
+      <div className="flex w-full items-center border-b border-gray py-2">
         {icon && <span className="mr-2 opacity-35">{icon}</span>}
         <input 
           id={inputIdAccessbility}
           type="text" 
-          className="w-full outline-none "
+          className="w-full outline-none bg-transparent"
           aria-invalid={error ? "true" : "false"}
           aria-describedby={error ? `${inputIdAccessbility}-error` : helperTxt ?  `${inputIdAccessbility}-helper`: undefined} 
           {...props} 
