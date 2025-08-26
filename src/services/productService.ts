@@ -25,8 +25,6 @@ export const fetchProduct = async (filters: ProductFilters = {}) => {
     throw new Error(`Erro ao carregar produto(s): ${error}`);
   }
 };
-
-
 export const getProducts = async () => {
     try {
         const response = await api.get(`/product`)
@@ -43,7 +41,6 @@ export const getProductById = async (id: string) => {
         throw new Error(`Erro ao carregar produtos: ${error}`)
     }
 }
-
 export const createProduct = async (data: ProductFormValues) => {
   try {
     console.log("dados do formulario", data);

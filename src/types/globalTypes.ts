@@ -48,7 +48,8 @@ export interface LoginResponse {
     name: string,
     email: string,
     phone: string,
-    photo: string
+    photo: string,
+    password: string
   }
 }
 
@@ -58,4 +59,5 @@ export interface AuthContextProps {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
+  updateUserData: (newUserData: any) => void;
 }

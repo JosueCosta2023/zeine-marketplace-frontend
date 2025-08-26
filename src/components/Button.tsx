@@ -10,7 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 
 const Button = ({className = "", children, variant = "outline", ...props}: ButtonProps) => {
 
-    const base = "w-full py-2 rounded-[10px] font-medium flex items-center justify-center gap-2 transition";
+    const base = "w-full py-2 gap-2 text-[14px] rounded-[10px] font-medium flex items-center justify-center transition ";
 
     const style = variant === "primary" ? 
     "bg-primary text-white hover:bg-secondary":

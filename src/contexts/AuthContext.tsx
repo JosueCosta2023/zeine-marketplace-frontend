@@ -10,8 +10,8 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<LoginResponse["user"] | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const navigate = useNavigate()
-  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   // Recupera usuário e token do localStorage ao iniciar
   useEffect(() => {
@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
-      api.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`
+      api.defaults.headers.common["Authorization"] = `Bearer ${savedToken}`;
     }
 
-    setLoading(false)
+    setLoading(false);
   }, []);
-  
+
   const login = async (email: string, password: string) => {
     try {
       const response = await loginService({ email, password });
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setToken(response.token);
       localStorage.setItem("token", response.token);
       localStorage.setItem("user", JSON.stringify(response.user));
-      api.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+      api.defaults.headers.common["Authorization"] = `Bearer ${response.token}`;
     } catch (error) {
       console.error("Erro ao efetura o login", error);
     }
@@ -42,20 +42,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = () => {
     setUser(null);
     setToken(null);
-    navigate("/login")
-    removeLocalStorage()
-}
+    navigate("/login");
+    removeLocalStorage();
+  };
+
+  // AuthContext.tsx
+  const updateUserData = (newUserData: any) => {
+    // ✅ Atualizar state
+    setUser(newUserData);
+
+    // ✅ Atualizar localStorage
+    localStorage.setItem("user", JSON.stringify(newUserData));
+
+    console.log("✅ LocalStorage atualizado:", newUserData);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{ user, token, login, logout, loading, updateUserData }}
+    >
       {children}
     </AuthContext.Provider>
   );
-
 };
-
-
-
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
