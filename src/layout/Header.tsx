@@ -1,18 +1,19 @@
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import { TbChartHistogram } from "react-icons/tb";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ArchiveImport from "../features/commun/ArchiveImport/ArchiveImport";
 import Button from "../components/Button";
 import { FiLogOut, FiPlus } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
 import { MdAccountBox } from "react-icons/md";
 import { useAuth } from "../contexts/AuthContext";
-import { removeLocalStorage } from "../utils/helpers";
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { user, logout } = useAuth();
+  const navigate = useNavigate()
 
   useEffect(() => {
     function handleClickOutSide(event: MouseEvent) {
@@ -29,6 +30,10 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutSide);
     };
   }, [menuOpen]);
+
+  const handlePerfilPage = () => {
+    navigate("/user")
+  }
 
   return (
     <header className=" flex items-center justify-evenly h-[64px] px-6 shadow-sm border-b-[1px] border-b-gray border-opacity-50">
@@ -97,6 +102,7 @@ const Header = () => {
               <button
                 className="w-full items-center justify-between flex text-left px-4 py-2 hover:bg-primary/10 text-primary"
                 onClick={() => {
+                  handlePerfilPage()
                   setMenuOpen(false);
                 }}
               >

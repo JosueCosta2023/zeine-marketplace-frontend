@@ -9,6 +9,7 @@ import RegistrationUserPage from "../features/auth/pages/RegistrationUserPage";
 import RegistrationProductPage from "../features/auth/pages/RegistrationProductPage";
 import { AuthProvider } from "../contexts/AuthContext";
 import PrivateRoutes from "./PrivateRoutes";
+import PerfilUserPage from "../features/auth/pages/PerfilUserPage";
 
 const AppRoutes = () => {
   return (
@@ -54,6 +55,14 @@ const AppRoutes = () => {
                   </PrivateRoutes>
                 }
               />
+            </Route>
+
+            <Route path="/user" element={
+              <PrivateRoutes>
+                <PerfilUserPage/>
+              </PrivateRoutes>
+            }>
+
             </Route>
           </Route>
 
