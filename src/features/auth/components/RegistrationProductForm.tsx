@@ -7,6 +7,7 @@ import { getCategories } from "../../../services/categoryService";
 import { BiEditAlt } from "react-icons/bi";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { createdUser } from "../../../services/userService";
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;
@@ -163,6 +164,7 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
           onChange={handleImageChange}
         />
       </div>
+      
 
       {/* right side */}
       <div className="bg-white rounded-[20px] p-[32px] w-[591px] ">
@@ -221,29 +223,31 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
           </div>
         </div>
 
-
         <div className="w-full bg-transparent py-3 px-2 outline-none">
-  <label htmlFor="description" className="text-grayScale font-medium block mb-1">
-    Descrição *
-  </label>
-  <textarea
-    id="description"
-    placeholder="Digite a descrição do produto..."
-    className="w-full border-b border-b-grayScale/50 py-3 bg-transparent outline-none text-grayScale focus:border-primary transition-colors resize-none min-h-[80px]"
-    value={values.description}
-    onChange={(e) =>
-      setValues({ ...values, description: e.target.value })
-    }
-    readOnly={readOnlys}
-    required
-    rows={3}
-    wrap="soft"
-    maxLength={500}
-  />
-  <div className="text-xs text-grayScale/60 mt-1 text-right">
-    {values.description.length}/500 caracteres
-  </div>
-</div>
+          <label
+            htmlFor="description"
+            className="text-grayScale font-medium block mb-1"
+          >
+            Descrição *
+          </label>
+          <textarea
+            id="description"
+            placeholder="Digite a descrição do produto..."
+            className="w-full border-b border-b-grayScale/50 py-3 bg-transparent outline-none text-grayScale focus:border-primary transition-colors resize-none min-h-[80px]"
+            value={values.description}
+            onChange={(e) =>
+              setValues({ ...values, description: e.target.value })
+            }
+            readOnly={readOnlys}
+            required
+            rows={3}
+            wrap="soft"
+            maxLength={500}
+          />
+          <div className="text-xs text-grayScale/60 mt-1 text-right">
+            {values.description.length}/500 caracteres
+          </div>
+        </div>
 
         <div className="w-full border-b border-b-grayScale/50">
           <label htmlFor="select" className="text-primary font-medium">
