@@ -70,7 +70,7 @@ const Header = () => {
               Tá esperando o quê?
             </h2>
             <p className=" text-primary text-3xl mb-6">
-               “🚀Boraa moeer!!🚀”
+               “🚀Boraa moeer!! <span className="transform rotate-180">🚀</span>”
             </p>
             <button
               onClick={closeSecretMessage}

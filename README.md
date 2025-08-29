@@ -1,69 +1,221 @@
-# React + TypeScript + Vite
+# 🛒 Marketplace Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação React moderna para um marketplace online, oferecendo uma experiência de usuário intuitiva para compradores e vendedores.
 
-Currently, two official plugins are available:
+## 🌟 Visão Geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A Plataforma Marketplace é desenvolvida com React 18, TypeScript e Tailwind CSS. A aplicação oferece funcionalidades completas de autenticação, gerenciamento de produtos, perfil de usuário e muito mais.
 
-## Expanding the ESLint configuration
+## 🚀 **Links Importantes**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **🌐 API em Produção:** [https://zeine-marketplace-api.vercel.app](https://zeine-marketplace-api.vercel.app)
+- **📚 Documentação Swagger:** [https://zeine-marketplace-api.vercel.app/api/docs](https://zeine-marketplace-api.vercel.app/api/docs)
+- **🔗 Repositório:** [https://github.com/JosueCosta2023/zeine-marketplace-api](https://github.com/JosueCosta2023/zeine-marketplace-api)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Funcionalidades Principais
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🔐 Autenticação e Autorização
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Login/Registro**: Sistema completo de autenticação com JWT
+- **Proteção de Rotas**: Rotas protegidas baseadas no status de autenticação
+- **Gerenciamento de Sessão**: Persistência de dados do usuário com localStorage
+- **Perfil de Usuário**: Edição completa de perfil com upload de imagem
+
+### 📦 Gerenciamento de Produtos
+
+- **Listagem de Produtos**: Visualização organizada e responsiva
+- **Filtros Avançados**: Filtragem por categoria, status e usuário
+- **CRUD Completo**: Criação, edição e exclusão de produtos
+- **Produtos por Usuário**: Visualização personalizada dos próprios produtos
+
+### 🎨 Interface do Usuário
+
+- **Componentes Reutilizáveis**: Arquitetura modular e escalável
+- **Feedback Visual**: Indicadores de carregamento e mensagens de status
+- **Easter Egg**: Funcionalidade especial oculta no header
+
+## 🛠️ Tecnologias Utilizadas
+
+### Core Technologies
+
+- **React 18**: Biblioteca principal para construção da UI
+- **TypeScript**: Tipagem estática para maior segurança do código
+- **Vite**: Build tool moderna e rápida
+- **React Router DOM**: Navegação e roteamento
+
+### Styling & UI
+
+- **Tailwind CSS**: Framework CSS utility-first
+- **React Icons**: Biblioteca completa de ícones
+- **CSS Modules**: Estilização component-scoped
+
+### State Management & HTTP
+
+- **Context API**: Gerenciamento de estado global
+- **Axios**: Cliente HTTP para comunicação com API
+- **localStorage**: Persistência de dados do usuário
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── features/          # Funcionalidades organizadas por domínio
+│   ├── auth/          # Autenticação e autorização
+│   │   ├── components/
+│   │   └── pages/
+│   └── commun/        # Componentes e páginas compartilhados
+│       ├── ArchiveImport/
+│       └── pages/
+├── layout/            # Componentes de layout
+├── routes/            # Configuração de rotas
+├── styles/            # Estilos globais
+└── assets/            # Recursos estáticos
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Componentes Principais
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🔑 AuthContext
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Localização**: `src/features/auth/context/AuthContext.tsx`
+
+- Gerenciamento global do estado de autenticação
+- Sincronização com localStorage
+- Atualização de dados do usuário em tempo real
+
+### 📋 ProductsListPage
+
+**Localização**: `src/features/auth/pages/ProductsListPage.tsx`
+
+- Listagem completa de produtos
+- Sistema de filtros avançado
+- Normalização de dados da API
+- Filtragem por usuário logado
+
+### 👤 PerfilUserPage
+
+**Localização**: `src/features/auth/pages/PerfilUserPage.tsx`
+
+- Edição completa do perfil
+- Upload e preview de imagem
+- Atualização em tempo real
+
+### 🧭 Header
+
+**Localização**: `src/layout/Header.tsx`
+
+- Navegação principal
+- Menu responsivo
+- Easter egg secreto (hover 7 segundos no botão)
+
+## 🔧 Configuração e Instalação
+
+### Pré-requisitos
+
+- Node.js 18+
+- npm ou yarn
+- Git
+
+### Instalação
+
+1. **Clone o repositório**
+
+```bash
+git clone https://github.com/seu-usuario/zeine-marketplace-frontend.git
+cd zeine-marketplace-frontend
 ```
+
+2. **Instale as dependências**
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+3. **Configure as variáveis de ambiente**
+
+```bash
+# Crie um arquivo .env na raiz do projeto
+VITE_API_URL=http://localhost:3000/api
+```
+
+4. **Execute o projeto**
+
+```bash
+npm run dev
+# ou
+yarn dev
+```
+
+5. **Acesse a aplicação**
+
+```
+http://localhost:5173
+```
+
+## 🌐 Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+npm run dev           # Inicia o servidor de desenvolvimento
+
+# Build
+npm run build         # Gera build de produção
+npm run preview       # Preview do build de produção
+
+# Qualidade de Código
+npm run lint          # Executa ESLint
+npm run type-check    # Verifica tipos TypeScript
+```
+
+## 🔐 Autenticação e Segurança
+
+### Sistema de Autenticação
+
+- **JWT Token**: Autenticação baseada em tokens
+- **Interceptors**: Configuração automática de headers
+- **Refresh Token**: Renovação automática de sessão
+- **Logout Seguro**: Limpeza completa do estado
+
+### Proteção de Dados
+
+- **Validação de Formulários**: Validação robusta no frontend
+- **Sanitização**: Tratamento seguro de inputs do usuário
+- **HTTPS**: Comunicação segura em produção
+
+
+
+## 🚀 Deploy e Produção
+
+### Vercel (Recomendado)
+
+```bash
+npm install -g vercel
+vercel --prod
+```
+
+### Build Manual
+
+```bash
+npm run build
+# Arquivos gerados em ./dist
+```
+
+## 👨‍💻 **Autor**
+
+### Josué Ocanha Costa
+#### FrontEnd Developer
+#### Redes Sociais
+
+- Linkedin - [JosueOcanhaCosta](https://www.linkedin.com/in/josue-ocanha-costa/)
+- Github - [JosueCosta2023](https://github.com/JosueCosta2023)
+- Twitter - [@JosueOcanhaCosta](https://twitter.com/josue_ocanha)
+- Facebook - [JosueCosta](https://www.facebook.com/JosueOcanhaCosta2023)
+- Whatsapp - [Josue2023](https://wa.me/5565996408371?text=Ol%C3%A1%2C+encontrei+seu+whatsapp+no+Github.+Gostaria+de+falar+sobre+seus+projetos.)
+
+# "Vida longa e próspera. 🖖🖖🖖"
+Feito com o ❤️ por Josué Ocanha Costa
+
+---
+
+⭐ **Se este projeto te ajudou, deixe uma estrela!** ⭐
