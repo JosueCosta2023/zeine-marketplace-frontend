@@ -25,6 +25,7 @@ export interface ProductFilters {
     description: string;
     categoryId?: string;
     status?: string;
+    userId: string;
   };
 
 

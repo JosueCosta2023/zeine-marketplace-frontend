@@ -8,6 +8,7 @@ import { fetchProduct, getProducts } from "../../../services/productService";
 import { getCategories } from "../../../services/categoryService";
 import type { Product } from "../../../types/globalTypes";
 import DelayedLoading from "../../../components/DelayedLoading";
+import { useAuth } from "../../../contexts/AuthContext";
 
 interface Category {
   id: string;
@@ -20,6 +21,21 @@ const ProductsListPage = () => {
   const [loading, setLoading] = useState(true);
   const [categorySearch, setCategorySearch] = useState("");
   const [status, setStatus] = useState("");
+  const { user } = useAuth();
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+
+  const filterProductByUserId = (productsArray: Product[]) => {
+    if (!user?.id) {
+      console.log("Usuario não logado");
+      return [];
+    }
+
+    const userProducts = productsArray.filter(
+      (product) => product.userId === user.id
+    );
+
+    return userProducts;
+  };
 
   // ✅ Função única para normalizar dados
   const normalizeProductsData = (response: any): Product[] => {
@@ -48,8 +64,6 @@ const ProductsListPage = () => {
 
     const loadInitialData = async () => {
       try {
-        console.log("🔄 Carregando produtos e categorias...");
-
         // Carregar produtos e categorias em paralelo
         const [productsResponse, categoriesResponse] = await Promise.all([
           getProducts(),
@@ -57,12 +71,13 @@ const ProductsListPage = () => {
         ]);
 
         if (isMounted) {
-          const productsArray = normalizeProductsData(productsResponse);
-          console.log("✅ Produtos carregados:", productsArray);
-          console.log("✅ Categorias carregadas:", categoriesResponse);
+          const allProductsArray = normalizeProductsData(productsResponse);
 
-          setProducts(productsArray);
+          setProducts(allProductsArray);
           setCategories(categoriesResponse || []);
+
+          const userProducts = filterProductByUserId(allProductsArray);
+          setProducts(userProducts);
         }
       } catch (error) {
         console.error("❌ Erro ao carregar dados iniciais:", error);
@@ -82,21 +97,19 @@ const ProductsListPage = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [user?.id]);
 
   // Função para carregar produtos com filtros
   const loadProductsWithFilters = async (filters = {}) => {
     setLoading(true);
 
     try {
-      console.log("📤 Filtros enviados para backend:", filters);
       const response = await fetchProduct(filters);
-      const productsArray = normalizeProductsData(response);
+      const allFilteredProducts = normalizeProductsData(response);
 
-      console.log("📥 Response do backend:", response);
-      console.log("📦 Produtos filtrados processados:", productsArray);
+      const userFilterProducts = filterProductByUserId(allFilteredProducts);
 
-      setProducts(productsArray);
+      setProducts(userFilterProducts);
     } catch (error) {
       console.error("❌ Erro ao carregar produtos com filtros:", error);
       setProducts([]);
@@ -132,23 +145,21 @@ const ProductsListPage = () => {
       filters.status = status;
     }
 
-    console.log("📋 Filtros finais:", filters);
-
-    // Se não há filtros, recarrega todos os produtos
     if (Object.keys(filters).length === 0) {
       setLoading(true);
-      getProducts()
-        .then((response) => {
-          const productsArray = normalizeProductsData(response);
-          setProducts(productsArray);
-        })
-        .catch((error) => {
-          console.error("❌ Erro ao recarregar produtos:", error);
-          setProducts([]);
-        })
-        .finally(() => setLoading(false));
+
+      // ✅ Verificar se allProducts existe e é um array
+      if (allProducts && Array.isArray(allProducts)) {
+        const userProducts = filterProductByUserId(allProducts);
+        setProducts(userProducts);
+      } else {
+        // Se não há produtos carregados, definir como array vazio
+        setProducts([]);
+      }
+
+      setTimeout(() => setLoading(false), 500);
     } else {
-      // Se há filtros, usa a função de filtros
+      // ✅ Se há filtros, usar a função de filtros (que já aplica filtro de usuário)
       loadProductsWithFilters(filters);
     }
   };
@@ -256,8 +267,8 @@ const ProductsListPage = () => {
 
             {products && products.length > 0 ? (
               products?.map((product) => {
-                console.log("Renderizado:", product)
-                console.log("Renderizado id:", product.id)
+                console.log("Renderizado:", product);
+                console.log("Renderizado id:", product.id);
                 return (
                   <Link to={`/products/${product.id}`} key={product.id}>
                     <CardProduct
