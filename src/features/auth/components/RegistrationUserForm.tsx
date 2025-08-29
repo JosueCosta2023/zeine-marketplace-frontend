@@ -12,6 +12,8 @@ import Input from "../../../components/Input";
 import { useRef, useState } from "react";
 import Button from "../../../components/Button";
 import PasswordValidate from "../../../components/PasswordValidate";
+import { createdUser } from "../../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationUserForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,9 +23,57 @@ const RegistrationUserForm = () => {
   const [passwd, setPasswd] = useState("");
   const [confirmPasswd, setConfirmPasswd] = useState("");
 
-  const handleSubmitRegister = (e: React.FormEvent) => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const navigate = useNavigate();
+
+  const senhaValida =
+    passwd.length >= 8 &&
+    /[@#$%^&*()":{}|<>]/.test(passwd) &&
+    /\d/.test(passwd) &&
+    passwd === confirmPasswd;
+
+  const handleSubmitRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Bem vindo, cadastro realizado com sucesso.");
+    setError("");
+    setSuccess("");
+
+    if (!name || !phone || !email || !passwd || !confirmPasswd) {
+      setError("Preencha todos os campos obrigatórios.");
+      return;
+    }
+    if (!senhaValida) {
+      setError("A senha não atende aos critérios.");
+      return;
+    }
+    if (!image) {
+      setError("Selecione uma imagem de perfil.");
+      return;
+    }
+
+    // Montar objeto para envio
+    const userData = {
+      name,
+      phone,
+      email,
+      password: passwd,
+      photo: image,
+    };
+
+    try {
+      await createdUser(userData);
+      setSuccess("Cadastro realizado com sucesso!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+      // Limpar campos se quiser
+    } catch (err: any) {
+      setError(err.message || "Erro ao cadastrar usuário.");
+    }
   };
 
   const handleImagechange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +90,31 @@ const RegistrationUserForm = () => {
       {/* Perfil */}
       <section className="mb-12">
         <h3 className="text-lg font-semibold mb-5">Perfil</h3>
+        {(error || success) && (
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+            <div className="bg-white rounded-lg shadow-lg p-8 min-w-[300px] flex flex-col items-center">
+              <span
+                className={`mb-4 text-2xl ${
+                  error ? "text-red-500" : "text-green-600"
+                }`}
+              >
+                {error ? "Erro" : "Sucesso"}
+              </span>
+              <p className="mb-6 text-center">{error || success}</p>
+              {error && (
+                <button
+                  className="px-4 py-2 bg-primary text-white rounded hover:bg-primaryDark"
+                  onClick={() => {
+                    setError("");
+                    setSuccess("");
+                  }}
+                >
+                  Fechar
+                </button>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Input de imagem do perfil */}
         <div className="flex flex-col items-start mb-6">
@@ -80,6 +155,8 @@ const RegistrationUserForm = () => {
           placeholder="Digite seu nome completo"
           icon={<FiUser />}
           required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <Input
           label="Telefone"
@@ -87,6 +164,8 @@ const RegistrationUserForm = () => {
           placeholder="(00) 0 0000 - 0000"
           icon={<FiPhone />}
           required
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </section>
       {/* Acesso */}
@@ -98,6 +177,8 @@ const RegistrationUserForm = () => {
           placeholder="Seu e-mail de acesso"
           icon={<FiMail />}
           required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <div className="relative mb-4">
           <Input
