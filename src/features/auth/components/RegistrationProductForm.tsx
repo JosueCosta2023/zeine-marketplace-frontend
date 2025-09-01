@@ -242,10 +242,10 @@ const RegistrationProductForm: React.FC<ProductFormProsp> = ({
             required
             rows={3}
             wrap="soft"
-            maxLength={500}
+            maxLength={200}
           />
           <div className="text-xs text-grayScale/60 mt-1 text-right">
-            {values.description.length}/500 caracteres
+            {values.description.length}/200 caracteres
           </div>
         </div>
 
