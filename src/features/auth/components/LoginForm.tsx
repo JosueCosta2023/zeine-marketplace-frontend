@@ -50,7 +50,7 @@ const LoginForm = () => {
         />
         <button
           type="button"
-          className="absolute right-3 top-12 text-gray-400"
+          className="absolute right-3 top-10 text-gray-400"
           onClick={() => setShowPassword((prev) => !prev)}
         >
           {showPassword ? <FiEyeOff /> : <FiEye />}
