@@ -17,7 +17,7 @@ const PasswordValidate = ({ password, confirmPassword }: PasswdType) => {
   // Função para definir ícone e cor
   const getStatus = (valid: boolean) => {
     if (password.length === 0) {
-      return { icon: <BiSolidSquare size={5} />, color: "text-black" };
+      return { icon: <BiSolidSquare size={5} />, color: "text-grayScale/70" };
     }
     return valid
       ? { icon: <BiCheck />, color: "text-green-500" }
@@ -26,12 +26,13 @@ const PasswordValidate = ({ password, confirmPassword }: PasswdType) => {
   return (
     <div className="mt-5 mb-5">
       <h3 className="text-lg font-semibold mb-3">Criterios de senhas</h3>
-      <ul>
+      <ul className="text-sm">
         <li
           className={`flex items-center gap-2 ${getStatus(oitoCaracter).color}`}
         >
           {getStatus(oitoCaracter).icon} Conter mais de 8 caracteres
         </li>
+
         <li
           className={`flex items-center gap-2 ${
             getStatus(caracterEspecial).color
@@ -39,6 +40,7 @@ const PasswordValidate = ({ password, confirmPassword }: PasswdType) => {
         >
           {getStatus(caracterEspecial).icon} Conter caracteres especiais @#$%
         </li>
+
         <li
           className={`flex items-center gap-2 ${
             getStatus(contemNumeros).color

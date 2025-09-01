@@ -42,12 +42,13 @@ const RegistrationUserForm = () => {
     setError("");
     setSuccess("");
 
-    if (!name || !phone || !email || !passwd || !confirmPasswd) {
-      setError("Preencha todos os campos obrigatórios.");
-      return;
-    }
     if (!senhaValida) {
       setError("A senha não atende aos critérios.");
+      return;
+    }
+
+    if (!name || !phone || !email || !passwd || !confirmPasswd) {
+      setError("Preencha todos os campos obrigatórios.");
       return;
     }
     if (!image) {
