@@ -10,6 +10,7 @@ A Plataforma Marketplace é desenvolvida com React 18, TypeScript e Tailwind CSS
 
 - **🌐 API em Produção Backend:** [https://zeine-marketplace-api.vercel.app](https://zeine-marketplace-api.vercel.app)
 - **📚 Documentação da API Backend Swagger:** [https://zeine-marketplace-api.vercel.app/api/docs](https://zeine-marketplace-api.vercel.app/api/docs)
+- **🔗 Voc~e esta aqui Repositório Frontend ✅:** [https://github.com/JosueCosta2023/zeine-marketplace-api](https://github.com/JosueCosta2023/zeine-marketplace-api)
 - **🔗 Repositório Backend:** [https://github.com/JosueCosta2023/zeine-marketplace-api](https://github.com/JosueCosta2023/zeine-marketplace-api)
 - **🔗 Deploy Frontend:** [https://zeine-marketplace-frontend-otmw.vercel.app/login](https://zeine-marketplace-frontend-otmw.vercel.app/login)
 - **🔗 Prototipo Figma:** [https://www.figma.com/design/DB09jeQKr3nebacAmJQZzw/Gest%C3%A3o-de-Marketplace-teste-tec-sinop?node-id=3-376&p=f&t=d5cSrpYKBoddHf4h-0](https://www.figma.com/design/DB09jeQKr3nebacAmJQZzw/Gest%C3%A3o-de-Marketplace-teste-tec-sinop?node-id=3-376&p=f&t=d5cSrpYKBoddHf4h-0)
