@@ -1,4 +1,4 @@
-import { BiCheck, BiX, BiSquareRounded, BiSquare, BiSolidSquare } from "react-icons/bi";
+import { BiCheck, BiX, BiSolidSquare } from "react-icons/bi";
 
 interface PasswdType {
   password: string;
