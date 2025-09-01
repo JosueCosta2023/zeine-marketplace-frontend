@@ -12,7 +12,7 @@ interface CardProdutProsp{
 
 
 const CardProduct = ({image, title, price, description, categoryId, status}: CardProdutProsp) => {
-      const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
+      const [_categories, setCategories] = useState<{ id: string; name: string }[]>([]);
     const [categoryName, setCategoryName] = useState<string>("Sem Categoria");
 
     useEffect(() => {

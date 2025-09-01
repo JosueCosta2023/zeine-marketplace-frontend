@@ -28,7 +28,7 @@ const formatDate = (dateStr: string) => {
     "DEZEMBRO",
   ];
 
-  const [ano, mes, dia] = dateStr.split("-");
+  const [mes, dia] = dateStr.split("-");
   return `${dia} de ${meses[parseInt(mes, 10) - 1]}`;
 };
 

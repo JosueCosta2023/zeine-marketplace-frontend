@@ -7,7 +7,7 @@ import { getCategories } from "../../../services/categoryService";
 import { BiEditAlt } from "react-icons/bi";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { createdUser } from "../../../services/userService";
+
 
 interface ProductFormProsp {
   initialValues?: ProductFormValues;

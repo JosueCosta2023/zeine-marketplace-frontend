@@ -5,7 +5,7 @@ interface DashBradCarsdProps {
     description: string
 }
 
-const DashBoardCards = ({id, icon, title, description}: DashBradCarsdProps) => {
+const DashBoardCards = ({icon, title, description}: DashBradCarsdProps) => {
 
     return(
         <div className="flex gap-4 w-full p-[10px] rounded-[20px] h-[30%] items-center bg-white">

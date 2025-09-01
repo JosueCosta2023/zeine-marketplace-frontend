@@ -22,7 +22,7 @@ const ProductsListPage = () => {
   const [categorySearch, setCategorySearch] = useState("");
   const [status, setStatus] = useState("");
   const { user } = useAuth();
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [allProducts, _setAllProducts] = useState<Product[]>([]);
 
   const filterProductByUserId = (productsArray: Product[]) => {
     if (!user?.id) {

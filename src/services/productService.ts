@@ -17,7 +17,7 @@ export const fetchProduct = async (filters: ProductFilters = {}) => {
     return response.data
     }
 
-    const response = await api.get(`/porduct`);
+    const response = await api.get(`/product`);
     return response.data
 
 
@@ -27,6 +27,7 @@ export const fetchProduct = async (filters: ProductFilters = {}) => {
 };
 export const getProducts = async () => {
     try {
+        console.log(api)
         const response = await api.get(`/product`)
         return response.data
     } catch (error) {
@@ -35,6 +36,7 @@ export const getProducts = async () => {
 }
 export const getProductById = async (id: string) => {
     try {
+
         const response = await api.get(`/product/${id}`)
         return response.data.result
     } catch (error) {
