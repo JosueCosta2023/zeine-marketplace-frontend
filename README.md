@@ -11,7 +11,8 @@ A Plataforma Marketplace é desenvolvida com React 18, TypeScript e Tailwind CSS
 - **🌐 API em Produção Backend:** [https://zeine-marketplace-api.vercel.app](https://zeine-marketplace-api.vercel.app)
 - **📚 Documentação da API Backend Swagger:** [https://zeine-marketplace-api.vercel.app/api/docs](https://zeine-marketplace-api.vercel.app/api/docs)
 - **🔗 Repositório Backend:** [https://github.com/JosueCosta2023/zeine-marketplace-api](https://github.com/JosueCosta2023/zeine-marketplace-api)
-- **🔗 Deploy Frontend:** []()
+- **🔗 Deploy Frontend:** [https://zeine-marketplace-frontend-otmw.vercel.app/login](https://zeine-marketplace-frontend-otmw.vercel.app/login)
+- **🔗 Prototipo Figma:** [https://www.figma.com/design/DB09jeQKr3nebacAmJQZzw/Gest%C3%A3o-de-Marketplace-teste-tec-sinop?node-id=3-376&p=f&t=d5cSrpYKBoddHf4h-0](https://www.figma.com/design/DB09jeQKr3nebacAmJQZzw/Gest%C3%A3o-de-Marketplace-teste-tec-sinop?node-id=3-376&p=f&t=d5cSrpYKBoddHf4h-0)
 
 ## 🚀 Funcionalidades Principais
 
@@ -34,6 +35,17 @@ A Plataforma Marketplace é desenvolvida com React 18, TypeScript e Tailwind CSS
 - **Componentes Reutilizáveis**: Arquitetura modular e escalável
 - **Feedback Visual**: Indicadores de carregamento e mensagens de status
 - **Easter Egg**: Funcionalidade especial oculta no header
+
+## 📐 Previa de Design
+
+Pagina de login:
+![pagina](./public/images/login.png)
+
+Pagina Home:
+![pagina](./public/images/home.png)
+
+Pagina de cadastro de Produtos:
+![pagina](./public/images/cadprod.png)
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -121,8 +133,7 @@ src/
 1. **Clone o repositório**
 
 ```bash
-git clone https://github.com/seu-usuario/zeine-marketplace-frontend.git
-cd zeine-marketplace-frontend
+git clone https://github.com/JosueCosta2023/zeine-marketplace-frontend.git
 ```
 
 2. **Instale as dependências**
@@ -137,7 +148,7 @@ yarn install
 
 ```bash
 # Crie um arquivo .env na raiz do projeto
-VITE_API_URL=http://localhost:3000/api
+VITE_API_URL=seu_url_local
 ```
 
 4. **Execute o projeto**
@@ -162,11 +173,7 @@ npm run dev           # Inicia o servidor de desenvolvimento
 
 # Build
 npm run build         # Gera build de produção
-npm run preview       # Preview do build de produção
 
-# Qualidade de Código
-npm run lint          # Executa ESLint
-npm run type-check    # Verifica tipos TypeScript
 ```
 
 ## 🔐 Autenticação e Segurança
