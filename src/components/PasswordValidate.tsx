@@ -1,59 +1,65 @@
-import { BiCheck, BiX } from "react-icons/bi";
+import { BiCheck, BiX, BiSquareRounded, BiSquare, BiSolidSquare } from "react-icons/bi";
 
-interface PasswdType{
-  password: string,
-  confirmPassword: string
+interface PasswdType {
+  password: string;
+  confirmPassword: string;
 }
 
-const PasswordValidate = ({password, confirmPassword}: PasswdType) => {
+const PasswordValidate = ({ password, confirmPassword }: PasswdType) => {
+  // Condicao de estilos
   const oitoCaracter = password.length >= 8;
   const caracterEspecial = /[@#$%^&*()":{}|<>]/.test(password);
   const contemNumeros = /\d/.test(password);
-  const ContemLetraMaiusculaEMinuscula = /[a-z]/.test(password) && /[A-Z]/.test(password);
-  const senhasIguais =  password === confirmPassword;
+  const ContemLetraMaiusculaEMinuscula =
+    /[a-z]/.test(password) && /[A-Z]/.test(password);
+  const senhasIguais = password === confirmPassword;
 
+  // Função para definir ícone e cor
+  const getStatus = (valid: boolean) => {
+    if (password.length === 0) {
+      return { icon: <BiSolidSquare size={5} />, color: "text-black" };
+    }
+    return valid
+      ? { icon: <BiCheck />, color: "text-green-500" }
+      : { icon: <BiX />, color: "text-red-600" };
+  };
   return (
     <div className="mt-5 mb-5">
       <h3 className="text-lg font-semibold mb-3">Criterios de senhas</h3>
       <ul>
         <li
+          className={`flex items-center gap-2 ${getStatus(oitoCaracter).color}`}
+        >
+          {getStatus(oitoCaracter).icon} Conter mais de 8 caracteres
+        </li>
+        <li
           className={`flex items-center gap-2 ${
-            oitoCaracter ? "text-green-500" : "text-red-600"
+            getStatus(caracterEspecial).color
           }`}
         >
-          {oitoCaracter ? <BiCheck /> : <BiX />} Conter mais de 8 caracteres{" "}
+          {getStatus(caracterEspecial).icon} Conter caracteres especiais @#$%
+        </li>
+        <li
+          className={`flex items-center gap-2 ${
+            getStatus(contemNumeros).color
+          }`}
+        >
+          {getStatus(contemNumeros).icon} Conter numeros
         </li>
 
         <li
           className={`flex items-center gap-2 ${
-            caracterEspecial ? "text-green-500" : "text-red-600"
+            getStatus(ContemLetraMaiusculaEMinuscula).color
           }`}
         >
-          {caracterEspecial ? <BiCheck /> : <BiX />} Conter caracteres especiais @#$%{" "}
+          {getStatus(ContemLetraMaiusculaEMinuscula).icon} Conter letras
+          maiúsculas e minúsculas
         </li>
 
         <li
-          className={`flex items-center gap-2 ${
-            contemNumeros ? "text-green-500" : "text-red-600"
-          }`}
+          className={`flex items-center gap-2 ${getStatus(senhasIguais).color}`}
         >
-          {contemNumeros ? <BiCheck /> : <BiX />} Conter numeros{" "}
-        </li>
-
-        <li
-          className={`flex items-center gap-2 ${
-            ContemLetraMaiusculaEMinuscula ? "text-green-500" : "text-red-600"
-          }`}
-        >
-          {ContemLetraMaiusculaEMinuscula ? <BiCheck /> : <BiX />}Conter Lentras maiusculas e minusculas{" "}
-        </li>
-
-        <li
-          className={`flex items-center gap-2 ${
-            senhasIguais ? "text-green-500" : "text-red-600"
-          }`}
-        >
-          {senhasIguais ? <BiCheck /> : <BiX />}A senhas devem ser iguais{" "}
+          {getStatus(senhasIguais).icon} As senhas devem ser iguais
         </li>
       </ul>
     </div>
